@@ -1,0 +1,16 @@
+name: lets_test_stuff
+
+on:
+    workflow_dispatch:
+        inputs:
+            test:
+                description: 'stuff&junk'
+                required: true
+
+jobs:
+    test:
+      name: test job
+      runs-on: ubuntu-latest
+      steps:
+        - name: step_one
+          run: echo "test"
