@@ -1,0 +1,239 @@
+diff --git a/README.md b/README.md
+index 8af6db2..d65db4b 100644
+--- a/README.md
++++ b/README.md
+@@ -1,3 +1,6 @@
+ # gitHubActionPractice
+ 
+ Adding for a test
++updatings
++
++here please
+diff --git a/gitdiff.File b/gitdiff.File
+new file mode 100644
+index 0000000..644b87d
+--- /dev/null
++++ b/gitdiff.File
+@@ -0,0 +1,37 @@
++diff --git a/.github/matrix-practice.yaml b/.github/matrix-practice.yaml
++index 8dcf903..75a2dc7 100644
++--- a/.github/matrix-practice.yaml
+++++ b/.github/matrix-practice.yaml
++@@ -1,10 +1,10 @@
++-name: lets_test_stuff
+++name: test
++ 
++ on:
++     workflow_dispatch:
++         inputs:
++             test:
++-                description: 'stuff&junk'
+++                description: 'stuffAndJunk'
++                 required: true
++ 
++ jobs:
++@@ -13,4 +13,6 @@ jobs:
++       runs-on: ubuntu-latest
++       steps:
++         - name: step_one
++-          run: echo "test"
++\ No newline at end of file
+++          run: echo "test"
+++        - name: step_two
+++          run: echo "TWO"
++\ No newline at end of file
++diff --git a/README.md b/README.md
++index 17e9065..8af6db2 100644
++--- a/README.md
+++++ b/README.md
++@@ -1 +1,3 @@
++-# gitHubActionPractice
++\ No newline at end of file
+++# gitHubActionPractice
+++
+++Adding for a test
+diff --git a/go.mod b/go.mod
+new file mode 100644
+index 0000000..7d8f674
+--- /dev/null
++++ b/go.mod
+@@ -0,0 +1,10 @@
++module github.com/githubActionPractice
++
++go 1.16
++
++require (
++	github.com/google/go-github/v37 v37.0.0
++	github.com/sergi/go-diff v1.2.0 // indirect
++	golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2
++	golang.org/x/oauth2 v0.0.0-20180821212333-d2e6202438be
++)
+diff --git a/go.sum b/go.sum
+new file mode 100644
+index 0000000..0501b89
+--- /dev/null
++++ b/go.sum
+@@ -0,0 +1,35 @@
++github.com/bluekeyes/go-gitdiff v0.5.2 h1:w29edWBA1aglw2d0eFaccIyTzMD6JvpM9Vz943wOR8g=
++github.com/bluekeyes/go-gitdiff v0.5.2/go.mod h1:QpfYYO1E0fTVHVZAZKiRjtSGY9823iCdvGXBcEzHGbM=
++github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
++github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
++github.com/golang/protobuf v1.3.2 h1:6nsPYzhq5kReh6QImI3k5qWzO4PEbvbIW2cwSfR/6xs=
++github.com/golang/protobuf v1.3.2/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
++github.com/google/go-cmp v0.5.6/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
++github.com/google/go-github/v37 v37.0.0 h1:rCspN8/6kB1BAJWZfuafvHhyfIo5fkAulaP/3bOQ/tM=
++github.com/google/go-github/v37 v37.0.0/go.mod h1:LM7in3NmXDrX58GbEHy7FtNLbI2JijX93RnMKvWG3m4=
++github.com/google/go-querystring v1.0.0 h1:Xkwi/a1rcvNg1PPYe5vI8GbeBY/jrVuDX5ASuANWTrk=
++github.com/google/go-querystring v1.0.0/go.mod h1:odCYkC5MyYFN7vkCjXpyrEuKhc/BUO6wN/zVPAxq5ck=
++github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=
++github.com/kr/pty v1.1.1/go.mod h1:pFQYn66WHrOpPYNljwOMqo10TkYh1fy3cYio2l3bCsQ=
++github.com/kr/text v0.1.0/go.mod h1:4Jbv+DJW3UT/LiOwJeYQe1efqtUx/iVham/4vfdArNI=
++github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
++github.com/sergi/go-diff v1.2.0 h1:XU+rvMAioB0UC3q1MFrIQy4Vo5/4VsRDQQXHsEya6xQ=
++github.com/sergi/go-diff v1.2.0/go.mod h1:STckp+ISIX8hZLjrqAeVduY0gWCT9IjLuqbuNXdaHfM=
++github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
++github.com/stretchr/testify v1.4.0/go.mod h1:j7eGeouHqKxXV5pUuKE4zz7dFj8WfuZ+81PSLYec5m4=
++golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2 h1:VklqNMn3ovrHsnt90PveolxSbWFaJdECFbxSq0Mqo2M=
++golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
++golang.org/x/net v0.0.0-20190311183353-d8887717615a h1:oWX7TPOiFAMXLq8o0ikBYfCJVlRHBcsciT5bXOrH628=
++golang.org/x/net v0.0.0-20190311183353-d8887717615a/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
++golang.org/x/oauth2 v0.0.0-20180821212333-d2e6202438be h1:vEDujvNQGv4jgYKudGeI/+DAX4Jffq6hpD55MmoEvKs=
++golang.org/x/oauth2 v0.0.0-20180821212333-d2e6202438be/go.mod h1:N/0e6XlmueqKjAGxoOufVs8QHGRruUQn6yWY3a++T0U=
++golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a h1:1BGLXjeY4akVXGgbC9HugT3Jv3hCI0z56oJR5vAMgBU=
++golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
++golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
++golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
++google.golang.org/appengine v1.1.0 h1:igQkv0AAhEIvTEpD5LIpAfav2eeVO9HBTjvKHVJPRSs=
++google.golang.org/appengine v1.1.0/go.mod h1:EbEs0AVv82hx2wNQdGPgUI5lhzA/G0D9YwlJXL52JkM=
++gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
++gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
++gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
++gopkg.in/yaml.v2 v2.2.4/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
+diff --git a/main.go b/main.go
+new file mode 100644
+index 0000000..2771031
+--- /dev/null
++++ b/main.go
+@@ -0,0 +1,32 @@
++package main
++
++import (
++	"context"
++	"fmt"
++	"log"
++
++	"github.com/google/go-github/v37/github"
++	"golang.org/x/oauth2"
++)
++
++func main() {
++	ctx := context.Background()
++	ts := oauth2.StaticTokenSource(
++		&oauth2.Token{AccessToken: "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"},
++	)
++	tc := oauth2.NewClient(ctx, ts)
++
++	client := github.NewClient(tc)
++
++	// list all repositories for the authenticated user
++	user, resp, err := client.Users.Get(ctx, "")
++	if err != nil {
++		fmt.Printf("\nerror: %v\n", err)
++		return
++	}
++
++	// Rate.Limit should most likely be 5000 when authorized.
++	log.Printf("Rate: %#v", resp.Rate)
++
++	fmt.Printf("\n%v\n", github.Stringify(user))
++}
+diff --git a/one_file.patch b/one_file.patch
+new file mode 100644
+index 0000000..2b5de65
+--- /dev/null
++++ b/one_file.patch
+@@ -0,0 +1,28 @@
++commit 5d9790fec7d95aa223f3d20936340bf55ff3dcbe
++Author: Morton Haypenny <mhaypenny@example.com>
++Date:   Tue Apr 2 22:55:40 2019 -0700
++
++    A file with multiple fragments.
++
++    The content is arbitrary.
++
++diff --git a/dir/file1.txt b/dir/file1.txt
++index ebe9fa54..fe103e1d 100644
++--- a/dir/file1.txt
+++++ b/dir/file1.txt
++@@ -3,6 +3,8 @@ fragment 1
++ context line
++-old line 1
++-old line 2
++ context line
+++new line 1
+++new line 2
+++new line 3
++ context line
++-old line 3
+++new line 4
+++new line 5
++@@ -31,2 +33,2 @@ fragment 2
++ context line
++-old line 4
+++new line 6
+\ No newline at end of file
+diff --git a/two_file.patch b/two_file.patch
+new file mode 100644
+index 0000000..cfa46d3
+--- /dev/null
++++ b/two_file.patch
+@@ -0,0 +1,48 @@
++commit 5d9790fec7d95aa223f3d20936340bf55ff3dcbe
++Author: Morton Haypenny <mhaypenny@example.com>
++Date:   Tue Apr 2 22:55:40 2019 -0700
++
++    A file with multiple fragments.
++
++    The content is arbitrary.
++
++diff --git a/dir/file1.txt b/dir/file1.txt
++index ebe9fa54..fe103e1d 100644
++--- a/dir/file1.txt
+++++ b/dir/file1.txt
++@@ -3,6 +3,8 @@ fragment 1
++ context line
++-old line 1
++-old line 2
++ context line
+++new line 1
+++new line 2
+++new line 3
++ context line
++-old line 3
+++new line 4
+++new line 5
++@@ -31,2 +33,2 @@ fragment 2
++ context line
++-old line 4
+++new line 6
++diff --git a/dir/file2.txt b/dir/file2.txt
++index 417ebc70..67514b7f 100644
++--- a/dir/file2.txt
+++++ b/dir/file2.txt
++@@ -3,6 +3,8 @@ fragment 1
++ context line
++-old line 1
++-old line 2
++ context line
+++new line 1
+++new line 2
+++new line 3
++ context line
++-old line 3
+++new line 4
+++new line 5
++@@ -31,2 +33,2 @@ fragment 2
++ context line
++-old line 4
+++new line 6
+\ No newline at end of file

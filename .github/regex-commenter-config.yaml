@@ -1,0 +1,6 @@
+defaults:
+  comment: "testing this probot thing"
+
+matches:
+  - description: "This is a comment description"
+    regex: "getRawStuff"
