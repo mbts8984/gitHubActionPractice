@@ -6,4 +6,6 @@ matches:
     regex: "getRawStuff"
   - regex: "fourth test"
     comment: "did this show up on the fourth test?"
+  - regex: fourth test
+    comment: "this one? "
   - regex: asdfTest
