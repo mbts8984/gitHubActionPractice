@@ -4,3 +4,5 @@ defaults:
 matches:
   - description: "This is a comment description"
     regex: "getRawStuff"
+  - regex: "fourth test"
+    comment: "did this show up on the fourth test?"
