@@ -19,6 +19,8 @@ var namedThing = github.RawOptions{Type: 1}
 // var commentStruct = &github.PullRequestComment{Body: github.String(s"this comment is from local")}
 var thingNotToInclude = thisIsntASecretButJustLook
 
+//adding a ccomment for testing purposes
+
 // var comment = github.PullRequestListCommentsOptions
 
 func main() {
