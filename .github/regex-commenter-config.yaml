@@ -1,4 +1,3 @@
 matches:
-  - description: "Comments on each pylint-disable in the pull request"
-    regex: ".*pylint: disable*"
-    comment: "Please don't disable 'pylint' checks."
+  regex: "asdfTest"
+  comment: "Comment made it!"
