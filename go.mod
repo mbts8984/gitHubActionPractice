@@ -1,6 +1,7 @@
 module github.com/githubActionPractice
 
 go 1.16
+TEST
 
 require (
 	github.com/google/go-github/v37 v37.0.0
