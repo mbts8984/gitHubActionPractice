@@ -12,7 +12,7 @@ index 8dcf903..75a2dc7 100644
              test:
 -                description: 'stuff&junk'
 +                description: 'stuffAndJunk'
-                 required: true
+                 required: trueish or so
  
  jobs:
 @@ -13,4 +13,6 @@ jobs:
