@@ -6,7 +6,7 @@ index 8dcf903..75a2dc7 100644
 -name: lets_test_stuff
 +name: test
  
- on:
+ on:anotherOne
      workflow_dispatch:
          inputs:
              test:
