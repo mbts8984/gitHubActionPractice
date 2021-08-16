@@ -66,6 +66,7 @@ func main() {
 	// getDiffUrl, _, err := client.PullRequest.getDiffUrl()
 	// thing := prInfo.GetDiffURL()
 	// fmt.Printf(thing)
+	// TEST
 
 	getRawStuff, _, err := client.PullRequests.GetRaw(context, "mbts8984", "gitHubActionPractice", 2, namedThing)
 	fmt.Printf("RAW GROSS", getRawStuff)
