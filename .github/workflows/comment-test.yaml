@@ -7,21 +7,9 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: actions/github-script@v4
         with:
           script: |
-            console.log('Context print ', context)
-
-            const owner = context.payload.repository.owner.login;
-            const repo = context.payload.repository.name;
-            const pullNumber = context.payload.pull_request.number;
-            const commitId = context.payload.pull_request.head.sha;
-
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '👋 Thanks for reporting!',
-              path: "README.md", 
-              line: 4
-            })
+            const script = require('./script.js')
+            console.log(script({github, context}))
