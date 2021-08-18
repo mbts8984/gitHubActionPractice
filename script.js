@@ -15,7 +15,11 @@ module.exports = async ({github, context}) => {
     // console.log("DIFF2: ", file)
     
     file.split("\n").forEach((line) => {
-        console.log('made it inloop', line)
+        // console.log('made it inloop', line)
+        if (line.startsWith("+")){
+            const addedLine = line.slice(1);
+            console.log('++++ ', addedLine)
+        }
     })
 
     try {
