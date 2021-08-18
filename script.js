@@ -8,9 +8,12 @@ module.exports = async ({github, context}) => {
       };
 
     const diff_url = context.payload.pull_request.diff_url
-    const result = await github.request(diff_url)
-    console.log("DIFF2: ", result)
+    const files = await github.request(diff_url)
+    console.log("DIFF2: ", files)
 
+    files.data.forEach((file) => {
+        console.log("FILE ", file) 
+    })
     
     try {
        await github.issues.createComment({
