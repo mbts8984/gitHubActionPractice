@@ -25,3 +25,6 @@ jobs:
               path: "README.md", 
               line: 4
             })
+            const diff_url = context.payload.pull_request.diff_url
+            const result = await github.request(diff_url)
+            console.log("RESULT", result)
