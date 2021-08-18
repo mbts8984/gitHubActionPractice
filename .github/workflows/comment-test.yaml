@@ -18,7 +18,7 @@ jobs:
 
       - name: "add comment"
       - uses: actions/checkout@v2
-      - uses: actions/github-script@5b4d85a0f5f947dc2146740da82f7caf4ffb9cab #v.4
+      - uses: actions/github-script@4.0.2 #v.4
         with:
           script: |
             await github.rest.pulls.createReviewComment({
