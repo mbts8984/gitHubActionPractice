@@ -7,14 +7,15 @@ module.exports = async ({github, context}) => {
         return !!text.match(regex)
       };
     
-    const files = await context.github.pulls.listFiles({
-        owner,
-        repo,
-        number: pullNumber,
-        mediaType: {
-          format: "diff",
-        },
-    });
+    const file = await context.github.pulls.listFiles()
+//     const files = await context.github.pulls.listFiles({
+//         owner,
+//         repo,
+//         number: pullNumber,
+//         mediaType: {
+//           format: "diff",
+//         },
+//     });
     console.log("DIFF1: ", files)
 
     const diff_url = context.payload.pull_request.diff_url
