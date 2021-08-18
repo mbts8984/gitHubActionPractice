@@ -10,7 +10,7 @@ module.exports = ({github, context}) => {
 
     const diff_url = context.payload.pull_request.diff_url
     const result = await github.request(diff_url)
-    console.log(result)
+    console.log("DIFF", result)
 
 
     github.issues.createComment({
