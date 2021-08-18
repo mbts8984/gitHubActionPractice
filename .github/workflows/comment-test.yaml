@@ -13,3 +13,4 @@ jobs:
           script: |
             const script = require('./script.js')
             console.log(script({github, context}))
+            await script({github, context})

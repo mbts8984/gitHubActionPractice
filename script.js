@@ -1,4 +1,4 @@
-module.exports = ({github, context}) => {
+module.exports = async ({github, context}) => {
     console.log("MADE IT TO SCRIPTS print")
     // console.log('Context print ', context)
 
