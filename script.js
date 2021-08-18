@@ -12,10 +12,10 @@ module.exports = async ({github, context}) => {
     
     const file = files.data
     
-    console.log("DIFF2: ", file)
+    // console.log("DIFF2: ", file)
     
     file.split("\n").forEach((line) => {
-        console.log('made it inloop')
+        console.log('made it inloop', line)
     })
 
     try {
