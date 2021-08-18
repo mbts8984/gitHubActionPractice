@@ -6,16 +6,6 @@ module.exports = async ({github, context}) => {
         const regex = new RegExp(pattern);
         return !!text.match(regex)
       };
-    
-    const files = await context.github.pulls.listFiles({
-        owner,
-        repo,
-        number: pullNumber,
-        mediaType: {
-          format: "diff",
-        },
-    });
-    console.log("DIFF1: ", files)
 
     const diff_url = context.payload.pull_request.diff_url
     const result = await github.request(diff_url)
@@ -29,5 +19,17 @@ module.exports = async ({github, context}) => {
         body: '👋 Thanks for reporting!'
       })
     
-    
+    try {
+        const attemptOne = await github.pull_request.createComment({
+            body: 'dogPop, dogPop, dogPop',
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            line: 7,
+            path: "README.md",
+            pull_number: context.pull_request.number,
+            commit_id: context.pull_request.commit_id
+        })
+    } catch (error) {
+        console.log("error", error)
+    }
   }
