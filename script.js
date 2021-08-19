@@ -8,7 +8,7 @@ module.exports = async ({github, context}) => {
 
     try {
         const config = yaml.load(fs.readFileSync(CONFIG_FILE, 'utf-8'))
-        console.log('Docssss ', doc)
+        console.log('Docssss ', config)
     } catch (error) {
         console.log('error getting yaml', error)
     }
