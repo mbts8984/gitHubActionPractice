@@ -1,8 +1,17 @@
 const CONFIG_FILE = './variables-to-check.yaml'
+const yaml = require('js-yaml')
+const fs = require('fs')
+
 
 module.exports = async ({github, context}) => {
     console.log("MADE IT TO SCRIPTS print")
-    console.log('Context print ', context)
+
+    try {
+        const doc = yaml.load(fs.readFileSync(CONFIG_FILE, 'utf-8'))
+        console.log('Docssss ', doc)
+    } catch (error) {
+        console.log('error getting yaml', error)
+    }
 
     const matchesPattern = (pattern, text) => {
         const regex = new RegExp(pattern);
