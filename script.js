@@ -13,10 +13,10 @@ module.exports = async ({github, context}) => {
     const files = await github.request(diff_url)
     
     const file = files.data
-    const config = await context.config(CONFIG_FILE)
+    const config = await context.config
 
     console.log("CONFIG HERE: ", config)
-    
+
     let position = 0
     file.split("\n").forEach((line) => {
         // console.log('made it inloop', line)
