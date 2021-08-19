@@ -5,10 +5,11 @@ const fs = require('fs')
 
 module.exports = async ({github, context}) => {
     console.log("MADE IT TO SCRIPTS print")
-
+    // let config = ''
     try {
-        const config = yaml.load(fs.readFileSync(CONFIG_FILE, 'utf-8'))
+        config = yaml.load(fs.readFileSync(CONFIG_FILE, 'utf-8'))
         console.log('Docssss ', config)
+        return config
     } catch (error) {
         console.log('error getting yaml', error)
     }
