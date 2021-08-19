@@ -2,7 +2,7 @@ const CONFIG_FILE = './variables-to-check.yaml'
 
 module.exports = async ({github, context}) => {
     console.log("MADE IT TO SCRIPTS print")
-    // console.log('Context print ', context)
+    console.log('Context print ', context)
 
     const matchesPattern = (pattern, text) => {
         const regex = new RegExp(pattern);
@@ -15,14 +15,14 @@ module.exports = async ({github, context}) => {
     const file = files.data
     const config = await context.config
 
-    console.log("CONFIG HERE: ", config)
+    // console.log("CONFIG HERE: ", config)
 
     let position = 0
     file.split("\n").forEach((line) => {
         // console.log('made it inloop', line)
         if (line.startsWith("+")){
             const addedLine = line.slice(1);
-            console.log('++++ ', addedLine)
+            // console.log('++++ ', addedLine)
         }
     })
 
