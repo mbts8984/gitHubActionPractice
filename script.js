@@ -42,7 +42,7 @@ module.exports = async ({github, context}) => {
                             issue_number: context.issue.number,
                             owner: context.repo.owner,
                             repo: context.repo.repo,
-                            body: (commentText, addedLine)
+                            body: (commentText + addedLine)
                         })
                     } catch (error) {
                         console.log('error getting yaml', error)
