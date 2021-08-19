@@ -11,6 +11,7 @@ jobs:
       - uses: actions/github-script@v4
         with:
           script: |
+            npm install js-yaml
             const script = require('./script.js')
             console.log(script({github, context}))
             await script
