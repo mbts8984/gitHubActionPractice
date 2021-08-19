@@ -7,7 +7,7 @@ module.exports = async ({github, context}) => {
     console.log("MADE IT TO SCRIPTS print")
 
     try {
-        const doc = yaml.load(fs.readFileSync(CONFIG_FILE, 'utf-8'))
+        const config = yaml.load(fs.readFileSync(CONFIG_FILE, 'utf-8'))
         console.log('Docssss ', doc)
     } catch (error) {
         console.log('error getting yaml', error)
@@ -22,27 +22,43 @@ module.exports = async ({github, context}) => {
     const files = await github.request(diff_url)
     
     const file = files.data
-    const config = await context.config
-
-    // console.log("CONFIG HERE: ", config)
+    // const config = await context.config
 
     let position = 0
     file.split("\n").forEach((line) => {
         // console.log('made it inloop', line)
         if (line.startsWith("+")){
             const addedLine = line.slice(1);
-            // console.log('++++ ', addedLine)
+            const matches = config.matches;
+
+            matches.forEach((match) => {
+                const commentText = "found a match here "
+
+                if (matchesPattern(match.regex, addedLine)){
+                    console.log("Commenting " + commentText + "on line " + position)
+                    try {
+                        github.issues.createComment({
+                            issue_number: context.issue.number,
+                            owner: context.repo.owner,
+                            repo: context.repo.repo,
+                            body: commentText
+                        })
+                    } catch (error) {
+                        console.log('error getting yaml', error)
+                    }
+                }
+            })
         }
     })
 
-    try {
-       await github.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: ' 👋👋👋👋👋 test'
-          })
-    } catch (error) {
-        console.log("error", error)
-    }
+    // try {
+    //    await github.issues.createComment({
+    //         issue_number: context.issue.number,
+    //         owner: context.repo.owner,
+    //         repo: context.repo.repo,
+    //         body: ' 👋👋👋👋👋 test'
+    //       })
+    // } catch (error) {
+    //     console.log("error", error)
+    // }
   }
