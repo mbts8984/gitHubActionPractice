@@ -33,10 +33,10 @@ module.exports = async ({github, context}) => {
             const matches = config.matches;
 
             matches.forEach((match) => {
-                const commentText = "found a match here "
+                const commentText = "GET YOUR MATCHES HERE "
 
                 if (matchesPattern(match.regex, addedLine)){
-                    console.log("Commenting " + commentText + "on line " + position)
+                    console.log("Commenting " + commentText + addedLine)
                     try {
                         github.issues.createComment({
                             issue_number: context.issue.number,
@@ -49,16 +49,7 @@ module.exports = async ({github, context}) => {
                     }
                 }
                 else {
-                    try {
-                        github.issues.createComment({
-                            issue_number: context.issue.number,
-                            owner: context.repo.owner,
-                            repo: context.repo.repo,
-                            body: 'comment from the else'
-                            })
-                        } catch (error) {
-                            console.log("error", error)
-                        }
+                    console.log('no match here: ', addedLine)
                 }
             })
         }
