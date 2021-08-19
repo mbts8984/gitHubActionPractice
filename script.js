@@ -1,5 +1,7 @@
+const CONFIG_FILE = './variables-to-check.yaml'
+
 module.exports = async ({github, context}) => {
-    console.log("MADE IT TO SCRIPTS print")
+    console.log("MADE IT TO SCRIPTS print", CONFIG_FILE)
     // console.log('Context print ', context)
 
     const matchesPattern = (pattern, text) => {
@@ -13,7 +15,7 @@ module.exports = async ({github, context}) => {
     const file = files.data
     
     // console.log("DIFF2: ", file)
-    
+    let position = 0
     file.split("\n").forEach((line) => {
         // console.log('made it inloop', line)
         if (line.startsWith("+")){
