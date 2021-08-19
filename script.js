@@ -52,7 +52,7 @@ module.exports = async ({github, context}) => {
             const matches = config.matches;
 
             matches.forEach((match) => {
-                const commentText = "GET YOUR MATCHES HERE "
+                const commentText = match.comment ? match.comment : config.defaults.comment;
 
                 if (matchesPattern(match.regex, addedLine)){
                     console.log("Commenting " + commentText + addedLine + "position : ", position)
