@@ -37,7 +37,7 @@ module.exports = async ({github, context}) => {
                 if (matchesPattern(match.regex, addedLine)){
                     console.log("Commenting " + commentText + "on line " + position)
                     try {
-                        await github.issues.createComment({
+                        github.issues.createComment({
                             issue_number: context.issue.number,
                             owner: context.repo.owner,
                             repo: context.repo.repo,
@@ -49,7 +49,7 @@ module.exports = async ({github, context}) => {
                 }
                 else {
                     try {
-                        await github.issues.createComment({
+                        github.issues.createComment({
                             issue_number: context.issue.number,
                             owner: context.repo.owner,
                             repo: context.repo.repo,
