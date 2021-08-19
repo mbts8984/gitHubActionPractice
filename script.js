@@ -5,13 +5,15 @@ const fs = require('fs')
 
 module.exports = async ({github, context}) => {
     console.log("MADE IT TO SCRIPTS print")
-
-    try {
-        const config = yaml.load(fs.readFileSync(CONFIG_FILE, 'utf-8'))
-        console.log('Docssss ', doc)
-    } catch (error) {
-        console.log('error getting yaml', error)
-    }
+   function getValues() {
+        try {
+            let config = yaml.load(fs.readFileSync(CONFIG_FILE, 'utf-8'))
+            console.log('Docssss ', config)
+            return config
+        } catch (error) {
+            console.log('error getting yaml', error)
+    }}
+    let config = getValues()
 
     const matchesPattern = (pattern, text) => {
         const regex = new RegExp(pattern);
@@ -22,7 +24,6 @@ module.exports = async ({github, context}) => {
     const files = await github.request(diff_url)
     
     const file = files.data
-    // const config = await context.config
 
     let position = 0
     file.split("\n").forEach((line) => {
@@ -32,34 +33,26 @@ module.exports = async ({github, context}) => {
             const matches = config.matches;
 
             matches.forEach((match) => {
-                const commentText = "found a match here "
+                const commentText = "GET YOUR MATCHES HERE "
 
                 if (matchesPattern(match.regex, addedLine)){
-                    console.log("Commenting " + commentText + "on line " + position)
+                    console.log("Commenting " + commentText + addedLine + "position : ", position)
                     try {
-                        await github.issues.createComment({
+                        github.issues.createComment({
                             issue_number: context.issue.number,
                             owner: context.repo.owner,
                             repo: context.repo.repo,
-                            body: commentText
+                            body: (commentText + addedLine)
                         })
                     } catch (error) {
                         console.log('error getting yaml', error)
                     }
                 }
                 else {
-                    try {
-                        await github.issues.createComment({
-                            issue_number: context.issue.number,
-                            owner: context.repo.owner,
-                            repo: context.repo.repo,
-                            body: 'comment from the else'
-                            })
-                        } catch (error) {
-                            console.log("error", error)
-                        }
+                    console.log('no match here: ', addedLine)
                 }
             })
         }
+      position += 1;
     })
   }
