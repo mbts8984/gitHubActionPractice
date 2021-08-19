@@ -36,7 +36,7 @@ module.exports = async ({github, context}) => {
                 const commentText = "GET YOUR MATCHES HERE "
 
                 if (matchesPattern(match.regex, addedLine)){
-                    console.log("Commenting " + commentText + addedLine)
+                    console.log("Commenting " + commentText + addedLine + "position : ", position)
                     try {
                         github.issues.createComment({
                             issue_number: context.issue.number,
@@ -53,5 +53,6 @@ module.exports = async ({github, context}) => {
                 }
             })
         }
+      position += 1;
     })
   }
