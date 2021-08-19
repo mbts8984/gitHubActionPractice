@@ -9,12 +9,19 @@ module.exports = async ({github, context}) => {
 
     const diff_url = context.payload.pull_request.diff_url
     const files = await github.request(diff_url)
-    console.log("DIFF2: ", files)
-
-    files.data.forEach((file) => {
-        console.log("FILE ", file) 
-    })
     
+    const file = files.data
+    
+    // console.log("DIFF2: ", file)
+    
+    file.split("\n").forEach((line) => {
+        // console.log('made it inloop', line)
+        if (line.startsWith("+")){
+            const addedLine = line.slice(1);
+            console.log('++++ ', addedLine)
+        }
+    })
+
     try {
        await github.issues.createComment({
             issue_number: context.issue.number,
