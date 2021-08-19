@@ -9,9 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/github-script@v4
+      - run: npm install js-yaml
         with:
           script: |
             const script = require('./script.js')
-            npm install js-yaml
             console.log(script({github, context}))
             await script
