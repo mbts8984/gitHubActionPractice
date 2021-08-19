@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/github-script@v4
       - run: npm install js-yaml
+      - uses: actions/github-script@v4
         with:
           script: |
             const script = require('./script.js')
