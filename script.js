@@ -5,14 +5,15 @@ const fs = require('fs')
 
 module.exports = async ({github, context}) => {
     console.log("MADE IT TO SCRIPTS print")
-    // let config = ''
-    try {
-        config = yaml.load(fs.readFileSync(CONFIG_FILE, 'utf-8'))
-        console.log('Docssss ', config)
-        return config
-    } catch (error) {
-        console.log('error getting yaml', error)
-    }
+   function getValues() {
+        try {
+            let config = yaml.load(fs.readFileSync(CONFIG_FILE, 'utf-8'))
+            console.log('Docssss ', config)
+            return config
+        } catch (error) {
+            console.log('error getting yaml', error)
+    }}
+    let config = getValues()
 
     const matchesPattern = (pattern, text) => {
         const regex = new RegExp(pattern);
@@ -23,7 +24,6 @@ module.exports = async ({github, context}) => {
     const files = await github.request(diff_url)
     
     const file = files.data
-    // const config = await context.config
 
     let position = 0
     file.split("\n").forEach((line) => {
