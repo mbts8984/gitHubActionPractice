@@ -37,7 +37,7 @@ module.exports = async ({github, context}) => {
                 if (matchesPattern(match.regex, addedLine)){
                     console.log("Commenting " + commentText + "on line " + position)
                     try {
-                        github.issues.createComment({
+                        await github.issues.createComment({
                             issue_number: context.issue.number,
                             owner: context.repo.owner,
                             repo: context.repo.repo,
@@ -47,18 +47,19 @@ module.exports = async ({github, context}) => {
                         console.log('error getting yaml', error)
                     }
                 }
+                else {
+                    try {
+                        await github.issues.createComment({
+                            issue_number: context.issue.number,
+                            owner: context.repo.owner,
+                            repo: context.repo.repo,
+                            body: 'comment from the else'
+                            })
+                        } catch (error) {
+                            console.log("error", error)
+                        }
+                }
             })
         }
     })
-
-    // try {
-    //    await github.issues.createComment({
-    //         issue_number: context.issue.number,
-    //         owner: context.repo.owner,
-    //         repo: context.repo.repo,
-    //         body: ' 👋👋👋👋👋 test'
-    //       })
-    // } catch (error) {
-    //     console.log("error", error)
-    // }
   }
