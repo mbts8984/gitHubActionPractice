@@ -1,7 +1,7 @@
 const CONFIG_FILE = './variables-to-check.yaml'
 
 module.exports = async ({github, context}) => {
-    console.log("MADE IT TO SCRIPTS print", CONFIG_FILE)
+    console.log("MADE IT TO SCRIPTS print")
     // console.log('Context print ', context)
 
     const matchesPattern = (pattern, text) => {
@@ -13,8 +13,10 @@ module.exports = async ({github, context}) => {
     const files = await github.request(diff_url)
     
     const file = files.data
+    const config = await context.config(CONFIG_FILE)
+
+    console.log("CONFIG HERE: ", config)
     
-    // console.log("DIFF2: ", file)
     let position = 0
     file.split("\n").forEach((line) => {
         // console.log('made it inloop', line)
