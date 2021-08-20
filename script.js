@@ -40,9 +40,9 @@ module.exports = async ({github, context}) => {
 
     const diff_url = context.payload.pull_request.diff_url
     const files = await github.request(diff_url)
-    
+    console.log('REST STUFF: ', github.rest)
     const file = files.data
-    console.log("DIFF HERE YO ", file)
+    // console.log("DIFF HERE YO ", file)
 
 
     // const alreadyHereComments = await getExistingComments(
@@ -64,7 +64,8 @@ module.exports = async ({github, context}) => {
                 const commentText = match.comment ? match.comment : config.defaults.comment;
 
                 if (matchesPattern(match.regex, addedLine)){
-                    console.log("Commenting " + commentText + addedLine + "position : ", position)
+
+                    // console.log("Commenting " + commentText + addedLine + "position : ", position)
                     try {
                         github.rest.pulls.createReviewComment({
                             issue_number: context.issue.number,
