@@ -40,7 +40,7 @@ module.exports = async ({github, context}) => {
 
     const diff_url = context.payload.pull_request.diff_url
     const files = await github.request(diff_url)
-    console.log('REST STUFF: ', github)
+    // console.log('REST STUFF: ', github)
     const file = files.data
     // console.log("DIFF HERE YO ", file)
 
@@ -67,7 +67,7 @@ module.exports = async ({github, context}) => {
 
                     // console.log("Commenting " + commentText + addedLine + "position : ", position)
                     try {
-                        github.rest.pulls.createReviewComment({
+                        github.pulls.createReviewComment({
                             issue_number: context.issue.number,
                             owner: context.repo.owner,
                             repo: context.repo.repo,
