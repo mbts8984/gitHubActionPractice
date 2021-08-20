@@ -21,12 +21,14 @@ const fs = require('fs')
 
 
 module.exports = async ({github, context}) => {
-//    console.log("MADE IT TO SCRIPTS print", context.payload.workflow_run.pull_requests[0])
-   
+    console.log("CONTEXT STUFF", context)
+    const ownerRef = context.repo.owner;
+    const repoRef = context.repo.repo;
+
    function getValues() {
         try {
             let config = yaml.load(fs.readFileSync(CONFIG_FILE, 'utf-8'))
-            console.log('Docssss ', config)
+            // console.log('Docssss ', config)
             return config
         } catch (error) {
             console.log('error getting yaml', error)
@@ -40,7 +42,6 @@ module.exports = async ({github, context}) => {
 
     const diff_url = context.payload.pull_request.diff_url
     const files = await github.request(diff_url)
-    // console.log('REST STUFF: ', github)
     const file = files.data
     // console.log("DIFF HERE YO ", file)
 
@@ -79,9 +80,6 @@ module.exports = async ({github, context}) => {
                     } catch (error) {
                         console.log('error getting yaml', error)
                     }
-                }
-                else {
-                    console.log('no match here: ', addedLine)
                 }
             })
         }
