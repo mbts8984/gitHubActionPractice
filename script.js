@@ -21,7 +21,7 @@ const fs = require('fs')
 
 
 module.exports = async ({github, context}) => {
-   console.log("MADE IT TO SCRIPTS print", context.payload.workflow_run.pull_requests[0])
+//    console.log("MADE IT TO SCRIPTS print", context.payload.workflow_run.pull_requests[0])
    
    function getValues() {
         try {
