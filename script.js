@@ -24,7 +24,7 @@ module.exports = async ({github, context}) => {
     const ownerRef = context.repo.owner;
     const repoRef = context.repo.repo;
     const commitIdRef = context.sha
-    const pullNumberRef = context.number
+    const pullNumberRef = context.payload.number
 
     console.log("CONTEXT STUFF", 'ID ', commitIdRef, "pR: ", pullNumberRef)
 
