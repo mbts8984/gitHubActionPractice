@@ -68,11 +68,10 @@ module.exports = async ({github, context}) => {
                     // console.log("Commenting " + commentText + addedLine + "position : ", position)
                     try {
                         github.pulls.createReviewComment({
-                            issue_number: context.issue.number,
                             owner: context.repo.owner,
                             repo: context.repo.repo,
                             body: (commentText + addedLine),
-                            pull_number: context.payload.number, 
+                            pull_number: context.payload.number,
                             commit_id: context.payload.sha,
                             path: "README.md",
                             line: 3
