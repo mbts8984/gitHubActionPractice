@@ -2,22 +2,22 @@ const CONFIG_FILE = './variables-to-check.yaml'
 const yaml = require('js-yaml')
 const fs = require('fs')
 
-const getExistingComments = async (github, owner, repo, pullNumber) => {
-    const allComments = await github.pulls.listComments({
-      owner,
-      repo,
-      number: pullNumber
-    })
-    return allComments.data.filter((comment) => {
-        return comment.user.login === BOT_NAME
-      })
-}
+// const getExistingComments = async (github, owner, repo, pullNumber) => {
+//     const allComments = await github.pulls.listComments({
+//       owner,
+//       repo,
+//       number: pullNumber
+//     })
+//     return allComments.data.filter((comment) => {
+//         return comment.user.login === BOT_NAME
+//       })
+// }
 
-const commentAlreadyExists = (comments, position, potentialCommentText) => {
-    return !!comments.find((comment) => {
-        return comment.position === position && comment.body === potentialCommentText;
-    })
-}
+// const commentAlreadyExists = (comments, position, potentialCommentText) => {
+//     return !!comments.find((comment) => {
+//         return comment.position === position && comment.body === potentialCommentText;
+//     })
+// }
 
 
 module.exports = async ({github, context}) => {
@@ -66,11 +66,15 @@ module.exports = async ({github, context}) => {
                 if (matchesPattern(match.regex, addedLine)){
                     console.log("Commenting " + commentText + addedLine + "position : ", position)
                     try {
-                        github.issues.createComment({
+                        github.rest.pulls.createReviewComment({
                             issue_number: context.issue.number,
                             owner: context.repo.owner,
                             repo: context.repo.repo,
-                            body: (commentText + addedLine)
+                            body: (commentText + addedLine),
+                            pull_number: context.payload.number, 
+                            commit_id: context.payload.sha,
+                            path: "README.md",
+                            line: 3
                         })
                     } catch (error) {
                         console.log('error getting yaml', error)
@@ -84,3 +88,12 @@ module.exports = async ({github, context}) => {
       position += 1;
     })
   }
+
+//   await github.rest.pulls.createReviewComment({
+//     body: '👋 👋 👋 test',
+//     owner: context.repo.owner, 
+//     repo: context.repo.repo,
+//     pull_number: context.payload.number, 
+//     commit_id: context.payload.sha,
+//     path: "README.md",
+//     line 3
