@@ -2,7 +2,7 @@ const CONFIG_FILE = './variables-to-check.yaml'
 const yaml = require('js-yaml')
 const fs = require('fs')
 
-const getBotComments = async (github, owner, repo, pullNumber) => {
+const getExistingComments = async (github, owner, repo, pullNumber) => {
     const allComments = await github.pulls.listComments({
       owner,
       repo,
@@ -21,7 +21,7 @@ const commentAlreadyExists = (comments, position, potentialCommentText) => {
 
 
 module.exports = async ({github, context}) => {
-   console.log("MADE IT TO SCRIPTS print")
+   console.log("MADE IT TO SCRIPTS print", context)
    
    function getValues() {
         try {
@@ -43,6 +43,15 @@ module.exports = async ({github, context}) => {
     
     const file = files.data
     console.log("DIFF HERE YO ", file)
+
+
+    // const alreadyHereComments = await getExistingComments(
+    //     context.github,
+    //     context.repo.owner, 
+    //     context.repo.repo,
+
+    // )
+
 
     let position = 0
     file.split("\n").forEach((line) => {
