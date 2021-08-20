@@ -21,7 +21,7 @@ const commentAlreadyExists = (comments, position, potentialCommentText) => {
 
 
 module.exports = async ({github, context}) => {
-   console.log("MADE IT TO SCRIPTS print", context.pull_request.head)
+   console.log("MADE IT TO SCRIPTS print", context.pull_request)
    
    function getValues() {
         try {
