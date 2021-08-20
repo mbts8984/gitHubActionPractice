@@ -21,9 +21,12 @@ const fs = require('fs')
 
 
 module.exports = async ({github, context}) => {
-    console.log("CONTEXT STUFF", context)
     const ownerRef = context.repo.owner;
     const repoRef = context.repo.repo;
+    const commitIdRef = context.sha
+    const pullNumberRef = context.number
+
+    console.log("CONTEXT STUFF", context, 'ID ', commitIdRef, "pR: ", pullNumberRef)
 
    function getValues() {
         try {
