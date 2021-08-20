@@ -40,7 +40,7 @@ module.exports = async ({github, context}) => {
 
     const diff_url = context.payload.pull_request.diff_url
     const files = await github.request(diff_url)
-    console.log('REST STUFF: ', github.rest)
+    console.log('REST STUFF: ', github)
     const file = files.data
     // console.log("DIFF HERE YO ", file)
 
