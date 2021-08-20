@@ -56,38 +56,52 @@ module.exports = async ({github, context}) => {
 
     // )
 
+    try {
+        github.pulls.createReviewComment({
+            owner: ownerRef,
+            repo: repoRef,
+            body: "VERY COOL. VERY LEGAL. ",
+            pull_number: pullNumberRef,
+            commit_id: commitIdRef,
+            path: "README.md",
+            line: 4
+        })
+    } catch (error) {
+        console.log('error getting yaml', error)
+    }
 
     let position = 0
-    file.split("\n").forEach((line) => {
-        // console.log('made it inloop', line)
-        if (line.startsWith("+")){
-            const addedLine = line.slice(1);
-            const matches = config.matches;
+    // file.split("\n").forEach((line) => {
+    //     // console.log('made it inloop', line)
+    //     if (line.startsWith("+")){
+    //         const addedLine = line.slice(1);
+    //         const matches = config.matches;
 
-            matches.forEach((match) => {
-                const commentText = match.comment ? match.comment : config.defaults.comment;
+    //         matches.forEach((match) => {
+    //             const commentText = match.comment ? match.comment : config.defaults.comment;
 
-                if (matchesPattern(match.regex, addedLine)){
+    //             if (matchesPattern(match.regex, addedLine)){
 
-                    // console.log("Commenting " + commentText + addedLine + "position : ", position)
-                    try {
-                        github.pulls.createReviewComment({
-                            owner: ownerRef,
-                            repo: repoRef,
-                            body: (commentText + addedLine),
-                            pull_number: pullNumberRef,
-                            commit_id: commitIdRef,
-                            path: "README.md",
-                            line: 3
-                        })
-                    } catch (error) {
-                        console.log('error getting yaml', error)
-                    }
-                }
-            })
-        }
-      position += 1;
-    })
+    //                 // console.log("Commenting " + commentText + addedLine + "position : ", position)
+    //                 try {
+    //                     github.pulls.createReviewComment({
+    //                         owner: ownerRef,
+    //                         repo: repoRef,
+    //                         body: (commentText + addedLine),
+    //                         pull_number: pullNumberRef,
+    //                         commit_id: commitIdRef,
+    //                         path: "README.md",
+    //                         line: 3
+    //                     })
+    //                 } catch (error) {
+    //                     console.log('error getting yaml', error)
+    //                 }
+    //             }
+    //         })
+    //     }
+    //   position += 1;
+    // }
+    // )
   }
 
 //   await github.rest.pulls.createReviewComment({
