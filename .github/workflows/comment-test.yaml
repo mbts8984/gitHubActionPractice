@@ -9,14 +9,26 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: npm install js-yaml
+      - run: npm install fs
+      - uses: actions/github-script@v4
+        steps:
+          script: |
+            const CONFIG_FILE = './variables-to-check.yaml'
+            const config = yaml.load(fs.readFileSync(CONFIG_FILE, 'utf-8'))
+            console.log('config', config)
       - uses: actions/github-script@v4
         with:
           script: |
+            const ownerRef = context.repo.owner;
+            const repoRef = context.repo.repo;
+            const commitIdRef = context.sha
+            const pullNumberRef = context.payload.number
+
             github.pulls.createReviewComment({
               pull_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'This is a fake comment',
+              body: 'This is a fake comment 1',
               commit_id: '${{ github.event.pull_request.head.sha }}',
               position: 1,
               path: "README.md"
