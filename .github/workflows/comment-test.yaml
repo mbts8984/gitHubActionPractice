@@ -11,7 +11,7 @@ jobs:
       - run: npm install js-yaml
       - run: npm install fs
       - uses: actions/github-script@v4
-        steps:
+        with:
           script: |
             const CONFIG_FILE = './variables-to-check.yaml'
             const config = yaml.load(fs.readFileSync(CONFIG_FILE, 'utf-8'))
