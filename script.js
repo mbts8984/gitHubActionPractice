@@ -55,6 +55,16 @@ module.exports = async ({github, context}) => {
     //     context.repo.repo,
 
     // )
+    const stupid = github.pulls.createReviewComment({
+        owner: ownerRef,
+        repo: repoRef,
+        body: "VERY COOL. VERY LEGAL. ",
+        pull_number: pullNumberRef,
+        commit_id: commitIdRef,
+        path: "README.md",
+        position: 4
+    })
+    console.log('STUPID; ', stupid)
     console.log("REQEST ", ownerRef, repoRef, pullNumberRef, commitIdRef)
     try {
         github.pulls.createReviewComment({
