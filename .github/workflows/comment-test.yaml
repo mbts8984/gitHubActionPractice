@@ -8,13 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm install js-yaml
-      - run: npm install fs
       - uses: actions/github-script@v4
         with:
           script: |
-            const CONFIG_FILE = './variables-to-check.yaml'
-            echo CONFIG_FILE
+            echo ./variables-to-check.yaml
       - uses: actions/github-script@v4
         with:
           script: |
