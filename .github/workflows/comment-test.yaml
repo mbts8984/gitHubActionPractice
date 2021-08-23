@@ -14,8 +14,7 @@ jobs:
         with:
           script: |
             const CONFIG_FILE = './variables-to-check.yaml'
-            const config = await context.config(CONFIG_FILE)
-            console.log('config', config)
+            echo CONFIG_FILE
       - uses: actions/github-script@v4
         with:
           script: |
