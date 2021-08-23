@@ -12,6 +12,12 @@ jobs:
       - uses: actions/github-script@v4
         with:
           script: |
-            const script = require('./script.js')
-            console.log(script({github, context}))
-            await script
+            github.pulls.createReviewComment({
+              pull_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'This is a fake comment',
+              commit_id: '${{ github.event.pull_request.head.sha }}',
+              position: 1,
+              path: "README.md"
+            })
