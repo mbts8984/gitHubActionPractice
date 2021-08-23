@@ -55,14 +55,14 @@ module.exports = async ({github, context}) => {
     //     context.repo.repo,
 
     // )
-
+    console.log("REQEST ", ownerRef, repoRef, pullNumberRef, commitIdRef)
     try {
         github.pulls.createReviewComment({
             owner: ownerRef,
             repo: repoRef,
             body: "VERY COOL. VERY LEGAL. ",
             pull_number: pullNumberRef,
-            commit_id: commitIdRef,
+            // commit_id: commitIdRef,
             path: "README.md",
             line: 4
         })
