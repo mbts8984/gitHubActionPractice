@@ -26,7 +26,7 @@ module.exports = async ({github, context}) => {
     const commitIdRef = context.sha
     const pullNumberRef = context.payload.number
 
-    console.log("CONTEXT STUFF", 'ID ', commitIdRef, "pR: ", pullNumberRef)
+    console.log("CONTEXT STUFF", context)
 
    function getValues() {
         try {
