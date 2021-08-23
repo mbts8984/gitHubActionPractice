@@ -62,9 +62,10 @@ module.exports = async ({github, context}) => {
             repo: repoRef,
             body: "VERY COOL. VERY LEGAL. ",
             pull_number: pullNumberRef,
-            // commit_id: commitIdRef,
+            commit_id: commitIdRef,
             path: "README.md",
-            line: 4
+            line: 4,
+            in_reply_to: 2
         })
     } catch (error) {
         console.log('error getting yaml', error)
