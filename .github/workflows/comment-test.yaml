@@ -14,7 +14,7 @@ jobs:
         with:
           script: |
             const CONFIG_FILE = './variables-to-check.yaml'
-            const config = yaml.load(fs.readFileSync(CONFIG_FILE, 'utf-8'))
+            const config = await context.config(CONFIG_FILE)
             console.log('config', config)
       - uses: actions/github-script@v4
         with:
