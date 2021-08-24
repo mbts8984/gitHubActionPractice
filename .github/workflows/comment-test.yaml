@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: get file
         run: |
-          const test = cat variables-to-check.yaml
+          test=`cat variables-to-check.yaml`
           echo "TERST " test
       - name: find matches
         uses: actions/github-script@v4
