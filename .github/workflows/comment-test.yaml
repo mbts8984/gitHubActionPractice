@@ -21,25 +21,7 @@ jobs:
             const commitIdRef = context.sha
             const pullNumberRef = context.payload.number
 
-            const matchesPattern = (pattern, text) => {
-              const regex = new RegExp(pattern);
-              return !!text.match(regex)
-            }
-
-            const diff_url = context.payload.pull_request.diff_url
-            const files = github.request(diff_url)
-            const file = files.data
-
-            let position = 0
-            file.split("\n").forEach((line) => {
-              if (line.startsWith("+")){
-                  const addedLine = line.slice(1);
-                  const matches = config.matches;
-
-                  console.log("match found ", matches)
-              }
-            position += 1;
-            })
+            console.log('vars ', ownerRef, repoRef, commitIdRef, pullNumberRef)
 
       - name: make comment
         uses: actions/github-script@v4
