@@ -14,10 +14,11 @@ jobs:
           echo "TERST " test
       - name: find matches
         uses: actions/github-script@v4
-        script: |
-          const diff_url = context.payload.pull_request.diff_url
-          const files = await github.request(diff_url)
-          const file = files.data
+        with:
+          script: |
+            const diff_url = context.payload.pull_request.diff_url
+            const files = await github.request(diff_url)
+            const file = files.data
 
       - name: make comment
         uses: actions/github-script@v4
