@@ -11,7 +11,8 @@ jobs:
       - name: get file
         run: |
           cat variables-to-check.yaml
-      - uses: actions/github-script@v4
+      - name: find matches
+        uses: actions/github-script@v4
         with:
           script: |
             const toCheck = cat variables-to-check.yaml
@@ -40,12 +41,15 @@ jobs:
             position += 1;
             })
 
-
+      - name: make comment
+        uses: actions/github-script@v4
+        with:
+          script: |
             github.pulls.createReviewComment({
               pull_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'This is a fake comment 10',
+              body: 'A MATCH MIGHT BE HERE',
               commit_id: '${{ github.event.pull_request.head.sha }}',
               position: 1,
               path: "README.md"
