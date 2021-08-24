@@ -10,9 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: get file
         run: |
-          test=`cat variables-to-check.yaml`
-          echo "TERST " test
-          console.log('TESTRAFSD', test)
+          cat variables-to-check.yaml
       - name: find matches
         uses: actions/github-script@v4
         with:
