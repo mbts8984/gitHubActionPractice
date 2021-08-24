@@ -20,8 +20,6 @@ jobs:
         run: |
           export FOO=${{ steps.yaml2json.outputs.data }}
           echo $FOO
-      - name: test the pass
-        run: echo $FOO
       - name: find matches
         uses: actions/github-script@v4
         with:
@@ -46,7 +44,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'A MATCH MIGHT BE HERE',
-              commit_id: github,
+              commit_id: ${{ github.event.pull_request.head.sha }},
               position: 1,
               path: "README.md"
             })
