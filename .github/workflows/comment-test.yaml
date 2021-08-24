@@ -15,9 +15,12 @@ jobs:
         uses: actions/github-script@v4
         with:
           script: |
-            const toCheck = cat variables-to-check.yaml
+            const ownerRef = context.repo.owner;
+            const repoRef = context.repo.repo;
+            const commitIdRef = context.sha
+            const pullNumberRef = context.payload.number
 
-            echo "to Check Vars " toCheck
+            echo "Owner"
 
       - name: make comment
         uses: actions/github-script@v4
