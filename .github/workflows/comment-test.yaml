@@ -14,16 +14,38 @@ jobs:
       - uses: actions/github-script@v4
         with:
           script: |
+            const toCheck = cat variables-to-check.yaml
             const ownerRef = context.repo.owner;
             const repoRef = context.repo.repo;
             const commitIdRef = context.sha
             const pullNumberRef = context.payload.number
 
+            const matchesPattern = (pattern, text) => {
+              const regex = new RegExp(pattern);
+              return !!text.match(regex)
+            }
+
+            const diff_url = context.payload.pull_request.diff_url
+            const files = await github.request(diff_url)
+            const file = files.data
+
+            let position = 0
+            file.split("\n").forEach((line) => {
+              if (line.startsWith("+")){
+                  const addedLine = line.slice(1);
+                  const matches = config.matches;
+
+                  console.log("match found ", matches)
+              }
+            position += 1;
+            })
+
+
             github.pulls.createReviewComment({
               pull_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'This is a fake comment 1',
+              body: 'This is a fake comment 10',
               commit_id: '${{ github.event.pull_request.head.sha }}',
               position: 1,
               path: "README.md"
