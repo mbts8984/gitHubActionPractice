@@ -1,7 +1,7 @@
 name: commenter
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, reopened, synchronize]
 
 jobs:
   comment:
@@ -9,21 +9,34 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: get file
+        uses: fabasoad/yaml-json-xml-converter-action@main
+        id: yaml2json
+        with:
+          path: "variables-to-check.yaml"
+          from: "yaml"
+          to: "json"
+
+      - name: Print the file
         run: |
-          cat variables-to-check.yaml
-      - uses: actions/github-script@v4
+          export FOO=${{ steps.yaml2json.outputs.data }}
+          echo $FOO
+      - name: find matches
+        uses: actions/github-script@v4
         with:
           script: |
-            const ownerRef = context.repo.owner;
-            const repoRef = context.repo.repo;
-            const commitIdRef = context.sha
-            const pullNumberRef = context.payload.number
+            const diff_url = context.payload.pull_request.diff_url
+            const files = await github.request(diff_url)
+            const file = files.data
 
+      - name: make comment
+        uses: actions/github-script@v4
+        with:
+          script: |
             github.pulls.createReviewComment({
               pull_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'This is a fake comment 1',
+              body: 'This is a fake comment',
               commit_id: '${{ github.event.pull_request.head.sha }}',
               position: 1,
               path: "README.md"
