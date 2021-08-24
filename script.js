@@ -18,7 +18,7 @@ const fs = require('fs')
 //         return comment.position === position && comment.body === potentialCommentText;
 //     })
 // }
-
+test!
 
 module.exports = async ({github, context}) => {
     const ownerRef = context.repo.owner;
