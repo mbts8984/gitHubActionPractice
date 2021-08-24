@@ -10,16 +10,25 @@ jobs:
       - uses: actions/checkout@v2
       - name: get file
         run: |
-          cat variables-to-check.yaml
+          const test = cat variables-to-check.yaml
+          echo "TERST " test
       - name: find matches
-        id: test
-        run: |
-          echo "You CAN deploy main to internal dev or mm100-dev to dev or test"
+        uses: actions/github-script@v4
+        script: |
+          const diff_url = context.payload.pull_request.diff_url
+          const files = await github.request(diff_url)
+          const file = files.data
 
       - name: make comment
         uses: actions/github-script@v4
         with:
           script: |
+            const ownerRef = context.repo.owner;
+            const repoRef = context.repo.repo;
+            const commitIdRef = context.sha
+            const pullNumberRef = context.payload.number
+
+
             github.pulls.createReviewComment({
               pull_number: context.issue.number,
               owner: context.repo.owner,
