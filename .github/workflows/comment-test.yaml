@@ -8,10 +8,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm install js-yaml
+      - name: get file
+        run: |
+          cat variables-to-check.yaml
       - uses: actions/github-script@v4
         with:
           script: |
-            const script = require('./script.js')
-            console.log(script({github, context}))
-            await script
+            const ownerRef = context.repo.owner;
+            const repoRef = context.repo.repo;
+            const commitIdRef = context.sha
+            const pullNumberRef = context.payload.number
+
+            github.pulls.createReviewComment({
+              pull_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'This is a fake comment 1',
+              commit_id: '${{ github.event.pull_request.head.sha }}',
+              position: 1,
+              path: "README.md"
+            })
