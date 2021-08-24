@@ -16,7 +16,7 @@ jobs:
           from: "yaml"
           to: "json"
       - name: Print the file
-        run: echo -e "${{ steps.yaml2json.outputs.data }}"
+        run: echo -e ${{ steps.yaml2json.outputs.data }}
       - name: find matches
         uses: actions/github-script@v4
         with:
