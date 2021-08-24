@@ -32,18 +32,11 @@ jobs:
         uses: actions/github-script@v4
         with:
           script: |
-
-            const ownerRef = context.repo.owner;
-            const repoRef = context.repo.repo;
-            const commitIdRef = context.sha
-            const pullNumberRef = context.payload.number
-
-
             github.pulls.createReviewComment({
               pull_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'A MATCH MIGHT BE HERE',
+              body: 'This is a fake comment',
               commit_id: '${{ github.event.pull_request.head.sha }}',
               position: 1,
               path: "README.md"
