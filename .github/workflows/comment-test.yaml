@@ -44,7 +44,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'A MATCH MIGHT BE HERE',
-              commit_id: ${{ github.event.pull_request.head.sha }},
+              commit_id: '${{ github.event.pull_request.head.sha }}',
               position: 1,
               path: "README.md"
             })
