@@ -21,7 +21,7 @@ jobs:
             const commitIdRef = context.sha
             const pullNumberRef = context.payload.number
 
-            console.log('vars ', ownerRef, repoRef, commitIdRef, pullNumberRef)
+            echo "Owner" ownerRef
 
       - name: make comment
         uses: actions/github-script@v4
