@@ -19,7 +19,7 @@ jobs:
       - name: Print the file
         run: |
           export FOO=${{ steps.yaml2json.outputs.data }}
-          echo "::set-env name=FOO::$FOO"
+          echo $FOO
       - name: test the pass
         run: echo $FOO
       - name: find matches
