@@ -9,8 +9,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: get file
-        run: |
-          cat variables-to-check.yaml
+        uses: fabasoad/yaml-json-xml-converter-action@main
+        id: yaml2json
+        with:
+          path: "variables-to-check.yaml"
+          from: "yaml"
+          to: "json"
+      - name: Print the file
+        run: echo "${{ steps.yaml2json.outputs.data }}"
       - name: find matches
         uses: actions/github-script@v4
         with:
@@ -23,6 +29,7 @@ jobs:
         uses: actions/github-script@v4
         with:
           script: |
+
             const ownerRef = context.repo.owner;
             const repoRef = context.repo.repo;
             const commitIdRef = context.sha
@@ -34,7 +41,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'A MATCH MIGHT BE HERE',
-              commit_id: '${{ github.event.pull_request.head.sha }}',
+              commit_id: github,
               position: 1,
               path: "README.md"
             })
