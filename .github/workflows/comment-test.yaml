@@ -15,8 +15,13 @@ jobs:
           path: "variables-to-check.yaml"
           from: "yaml"
           to: "json"
+
       - name: Print the file
-        run: echo -e ${{ steps.yaml2json.outputs.data }}
+        run: |
+          export FOO=${{ steps.yaml2json.outputs.data }}
+          echo "::set-env name=FOO::$FOO"
+      - name: test the pass
+        run: echo $FOO
       - name: find matches
         uses: actions/github-script@v4
         with:
