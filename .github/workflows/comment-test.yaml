@@ -12,6 +12,7 @@ jobs:
         run: |
           test=`cat variables-to-check.yaml`
           echo "TERST " test
+          console.log('TESTRAFSD' test)
       - name: find matches
         uses: actions/github-script@v4
         with:
