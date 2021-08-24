@@ -12,12 +12,9 @@ jobs:
         run: |
           cat variables-to-check.yaml
       - name: find matches
-        uses: actions/github-script@v4
-        with:
-          script: |
-
-
-            echo -e Owner
+        id: test
+        run: |
+          echo "You CAN deploy main to internal dev or mm100-dev to dev or test"
 
       - name: make comment
         uses: actions/github-script@v4
