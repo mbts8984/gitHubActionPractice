@@ -27,7 +27,7 @@ jobs:
             }
 
             const diff_url = context.payload.pull_request.diff_url
-            const files = await github.request(diff_url)
+            const files = github.request(diff_url)
             const file = files.data
 
             let position = 0
