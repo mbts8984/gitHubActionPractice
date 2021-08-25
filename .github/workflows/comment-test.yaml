@@ -18,8 +18,7 @@ jobs:
 
       - name: Print the file
         run: |
-          export CONFIG=${{ steps.yaml2json.outputs.data }}
-          echo "::set-env name=CONFIG::$CONFIG"
+          echo CONFIG=${{ steps.yaml2json.outputs.data }} >> $GITHUB_ENV
       - name: find matches
         uses: actions/github-script@v4
         with:
@@ -45,7 +44,7 @@ jobs:
             file.split("\n").forEach((line) => {
               if (line.startsWith("+")){
                 const addedLine = line.slice(1);
-                const matches = $CONFIG.matches;
+                const matches = ${{ env.CONFIG }};
                 console.log('matches? ', matches)
               }
             })
