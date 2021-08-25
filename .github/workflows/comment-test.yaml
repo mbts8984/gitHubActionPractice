@@ -37,6 +37,10 @@ jobs:
               return !!text.match(regex)
             }
 
+            const diff_url = context.payload.pull_request.diff_url
+            const files = await github.request(diff_url)
+            const file = files.data
+            let position = 0
 
             github.pulls.createReviewComment({
               pull_number: context.issue.number,
