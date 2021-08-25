@@ -42,6 +42,8 @@ jobs:
             const file = files.data
             let position = 0
 
+            console.log('URL ', diff_url)
+
             github.pulls.createReviewComment({
               pull_number: context.issue.number,
               owner: context.repo.owner,
