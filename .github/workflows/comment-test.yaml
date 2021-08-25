@@ -37,18 +37,6 @@ jobs:
               return !!text.match(regex)
             }
 
-            const diff_url = context.payload.pull_request.diff_url
-            const files = await github.request(diff_url)
-            const file = files.data
-            let position = 0
-
-            file.split("\n").forEach((line) => {
-              if (line.startsWith("+")){
-                const addedLine = line.slice(1);
-                const matches = CONFIG.matches;
-                echo matches
-              }
-            })
 
             github.pulls.createReviewComment({
               pull_number: context.issue.number,
