@@ -19,7 +19,7 @@ jobs:
       - name: Print the file
         run: |
           export CONFIG=${{ steps.yaml2json.outputs.data }}
-          echo $CONFIG
+          echo "::set-env name=CONFIG::$CONFIG"
       - name: find matches
         uses: actions/github-script@v4
         with:
