@@ -18,8 +18,8 @@ jobs:
 
       - name: Print the file
         run: |
-          export FOO=${{ steps.yaml2json.outputs.data }}
-          echo $FOO
+          export CONFIG=${{ steps.yaml2json.outputs.data }}
+          echo $CONFIG
       - name: find matches
         uses: actions/github-script@v4
         with:
@@ -32,6 +32,24 @@ jobs:
         uses: actions/github-script@v4
         with:
           script: |
+            const matchesPattern = (pattern, text) => {
+              const regex = new RegExp(pattern);
+              return !!text.match(regex)
+            }
+
+            const diff_url = context.payload.pull_request.diff_url
+            const files = await github.request(diff_url)
+            const file = files.data
+            let position = 0
+
+            file.split("\n").forEach((line) => {
+              if (line.startsWith("+")){
+                const addedLine = line.slice(1);
+                const matches = CONFIG.matches;
+                echo matches
+              }
+            })
+
             github.pulls.createReviewComment({
               pull_number: context.issue.number,
               owner: context.repo.owner,
