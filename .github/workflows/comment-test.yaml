@@ -44,8 +44,8 @@ jobs:
 
             file.split("\n").forEach((line) => {
               if (line.startsWith("+")){
-                console.log("FOUND YAH")
-               
+                const addedLine = line.slice(1);
+                console.log('HERE ', addedLine)
               }
             })
 
