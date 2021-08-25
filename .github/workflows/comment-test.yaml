@@ -43,7 +43,7 @@ jobs:
             let position = 0
 
             console.log('URL ', diff_url)
-            console.log('files ', file)
+            console.log('FILE ', file)
 
             github.pulls.createReviewComment({
               pull_number: context.issue.number,
