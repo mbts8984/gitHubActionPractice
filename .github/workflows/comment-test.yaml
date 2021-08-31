@@ -20,9 +20,6 @@ jobs:
         run: |
           echo ${{ steps.yaml2json.outputs.data }}
           echo "CONFIG=${{ steps.yaml2json.outputs.data }}" >> $GITHUB_ENV
-      - name: print the file
-        run: |
-          echo "${{ env.CONFIG }}"
       - name: find matches
         uses: actions/github-script@v4
         with:
@@ -49,7 +46,10 @@ jobs:
               if (line.startsWith("+")){
                 const addedLine = line.slice(1);
                 const matches = ${{ steps.yaml2json.outputs.data }}
-                console.log('MATCH', matches)
+
+                for(const match in matches.matches){
+                  console.log('MATCH', match)
+                }
 
               }
               position += 1;
