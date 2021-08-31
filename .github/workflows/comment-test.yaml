@@ -58,7 +58,7 @@ jobs:
                             repo: context.repo.repo,
                             body: (commentText + addedLine),
                             commit_id: '${{ github.event.pull_request.head.sha }}',
-                            position: 1,
+                            position: position,
                             path: "script.js"
                         })
                     } catch (error) {
