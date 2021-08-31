@@ -18,6 +18,7 @@ jobs:
 
       - name: Get the file
         run: |
+          echo ${{ steps.yaml2json.outputs.data }}
           echo "CONFIG=${{ steps.yaml2json.outputs.data }}" >> $GITHUB_ENV
       - name: print the file
         run: |
