@@ -47,24 +47,8 @@ jobs:
             file.split("\n").forEach((line) => {
               if (line.startsWith("+")){
                 const addedLine = line.slice(1);
-                const matches = JSON.parse(${{ env.CONFIG }})
+                const matches = JSON.parse("${{ env.CONFIG }}")
                 console.log('MATCH', matches)
-                
-                # matches.forEach((match) => {
-                #   console.log('FOUND A MATCH', match)
-                #   const commentText = match.comment ? match.comment : config.defaults.comment;
-                #   if (matchesPattern(match.regex, addedLine)){
-                #     github.pulls.createReviewComment({
-                #       pull_number: context.issue.number,
-                #       owner: context.repo.owner,
-                #       repo: context.repo.repo,
-                #       body: (commentText + addedLine),
-                #       commit_id: '${{ github.event.pull_request.head.sha }}',
-                #       position: 1,
-                #       path: "script.js"
-                #     })
-                #   }
-                # })
 
               }
               position += 1;
