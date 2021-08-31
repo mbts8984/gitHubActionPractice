@@ -50,6 +50,7 @@ jobs:
                 for(const match of matches.matches){
                   const commentText = match.comment ? match.comment : matches.defaults.comment;
                   if (matchesPattern(match.regex, addedLine)){
+                    console.log("Commenting " + commentText + addedLine + "position : ", position)
                     try {
                         github.pulls.createReviewComment({
                             pull_number: context.issue.number,
