@@ -40,6 +40,7 @@ jobs:
             const diff_url = context.payload.pull_request.diff_url
             const files = await github.request(diff_url)
             const file = files.data
+            console.log("DIFF ", file)
             let position = 0
 
             file.split("\n").forEach((line) => {
