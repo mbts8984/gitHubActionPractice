@@ -47,7 +47,7 @@ jobs:
                 const addedLine = line.slice(1);
                 const matches = ${{ steps.yaml2json.outputs.data }}
 
-                for(const match in matches.matches){
+                for(const match of matches.matches){
                   console.log('MATCH', match)
                 }
 
