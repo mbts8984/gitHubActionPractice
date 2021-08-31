@@ -49,9 +49,8 @@ jobs:
                 const addedLine = line.slice(1);
                 const matches = "${{ env.CONFIG }}"
 
-                for(const match in matches){
-                  console.log('MATCH', match)
-                }
+                console.log('MATCH', match)
+                
 
               }
 
