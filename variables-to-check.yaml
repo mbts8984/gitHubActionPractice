@@ -4,3 +4,4 @@ matches:
   - regex: ".*DANGEROUSLY_do_something*"
   - regex: ".*tacoCat*" # no comment specified, uses default comment.
   - regex: ".*dangerNoodle*"
+    comment: "dont talk about danger noodles"

@@ -40,6 +40,7 @@ jobs:
             const diff_url = context.payload.pull_request.diff_url
             const files = await github.request(diff_url)
             const file = files.data
+            console.log("DIFF ", file)
             let position = 0
 
             file.split("\n").forEach((line) => {
@@ -50,6 +51,7 @@ jobs:
                 for(const match of matches.matches){
                   const commentText = match.comment ? match.comment : matches.defaults.comment;
                   if (matchesPattern(match.regex, addedLine)){
+                    console.log("Commenting " + commentText + addedLine + "position : ", position)
                     try {
                         github.pulls.createReviewComment({
                             pull_number: context.issue.number,
@@ -57,7 +59,7 @@ jobs:
                             repo: context.repo.repo,
                             body: (commentText + addedLine),
                             commit_id: '${{ github.event.pull_request.head.sha }}',
-                            position: 1,
+                            position: position,
                             path: "script.js"
                         })
                     } catch (error) {

@@ -18,7 +18,8 @@ const fs = require('fs')
 //         return comment.position === position && comment.body === potentialCommentText;
 //     })
 // }
-test!
+"look at me! I changed!"
+tacoCat
 
 module.exports = async ({github, context}) => {
     const ownerRef = context.repo.owner;
@@ -55,30 +56,7 @@ module.exports = async ({github, context}) => {
     //     context.repo.repo,
 
     // )
-    const stupid = github.pulls.createReviewComment({
-        owner: ownerRef,
-        repo: repoRef,
-        body: "VERY COOL. VERY LEGAL. ",
-        pull_number: pullNumberRef,
-        commit_id: commitIdRef,
-        path: "README.md",
-        position: 4
-    })
-    console.log('STUPID; ', stupid)
-    console.log("REQEST ", ownerRef, repoRef, pullNumberRef, commitIdRef)
-    try {
-        github.pulls.createReviewComment({
-            owner: ownerRef,
-            repo: repoRef,
-            body: "VERY COOL. VERY LEGAL. ",
-            pull_number: pullNumberRef,
-            commit_id: commitIdRef,
-            path: "README.md",
-            position: 4
-        })
-    } catch (error) {
-        console.log('error getting yaml', error)
-    }
+    
 
     let position = 0
     file.split("\n").forEach((line) => {
