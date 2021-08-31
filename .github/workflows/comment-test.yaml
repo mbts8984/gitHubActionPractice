@@ -48,7 +48,7 @@ jobs:
             file.split("\n").forEach((line) => {
               if (line.startsWith("+")){
                 const addedLine = line.slice(1);
-                const matches = JSON.parse("${{ env.CONFIG }}")
+                const matches = ${{ steps.yaml2json.outputs.data }}
                 console.log('MATCH', matches)
 
               }
