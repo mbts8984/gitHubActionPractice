@@ -45,7 +45,7 @@ jobs:
               if (line.startsWith("+")){
                 const addedLine = line.slice(1);
                 const matches = ${{ env.CONFIG }};
-                echo ${{ env.CONFIG }}
+                console.log('matches? ', matches)
               }
             })
 
