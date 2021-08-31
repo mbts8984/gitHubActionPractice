@@ -38,7 +38,7 @@ module.exports = async ({github, context}) => {
             console.log('error getting yaml', error)
     }}
     let config = getValues()
-
+    dangerNoodle
     const matchesPattern = (pattern, text) => {
         const regex = new RegExp(pattern);
         return !!text.match(regex)
