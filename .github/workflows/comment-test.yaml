@@ -49,7 +49,7 @@ jobs:
                 const addedLine = line.slice(1);
                 const matches = "${{ env.CONFIG }}"
 
-                console.log('MATCH', match)
+                console.log('MATCH', matches)
                 
 
               }
