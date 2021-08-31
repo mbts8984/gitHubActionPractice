@@ -18,7 +18,7 @@ jobs:
 
       - name: Print the file
         run: |
-          echo CONFIG=${{ steps.yaml2json.outputs.data }} >> $GITHUB_ENV
+          echo "CONFIG=${{ steps.yaml2json.outputs.data }}" >> $GITHUB_ENV
       - name: find matches
         uses: actions/github-script@v4
         with:
