@@ -48,7 +48,7 @@ jobs:
                 const matches = ${{ steps.yaml2json.outputs.data }}
 
                 for(const match of matches.matches){
-                  const commentText = match.comment ? match.comment : config.defaults.comment;
+                  const commentText = match.comment ? match.comment : match.defaults.comment;
                   if (matchesPattern(match.regex, addedLine)){
                     try {
                         github.pulls.createReviewComment({
