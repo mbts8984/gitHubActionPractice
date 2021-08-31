@@ -44,7 +44,10 @@ jobs:
             let position = 0
 
             file.split("\n").forEach((line) => {
-              if (line.startsWith("+")){
+              if (line.startsWith("+++")){
+                position = 0
+              }
+              else if (line.startsWith("+")){
                 const addedLine = line.slice(1);
                 const matches = ${{ steps.yaml2json.outputs.data }}
 
