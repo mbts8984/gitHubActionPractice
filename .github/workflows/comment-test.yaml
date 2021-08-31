@@ -48,7 +48,22 @@ jobs:
                 const matches = ${{ steps.yaml2json.outputs.data }}
 
                 for(const match of matches.matches){
-                  console.log('MATCH', match)
+                  const commentText = match.comment ? match.comment : config.defaults.comment;
+                  if (matchesPattern(match.regex, addedLine)){
+                    try {
+                        github.pulls.createReviewComment({
+                            pull_number: context.issue.number,
+                            owner: context.repo.owner,
+                            repo: context.repo.repo,
+                            body: (commentText + addedLine),
+                            commit_id: '${{ github.event.pull_request.head.sha }}',
+                            position: 1,
+                            path: "script.js"
+                        })
+                    } catch (error) {
+                        console.log('error getting yaml', error)
+                    }
+                  }
                 }
 
               }
