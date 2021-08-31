@@ -16,10 +16,10 @@ jobs:
           from: "yaml"
           to: "json"
 
-      - name: Print the file
+      - name: Get the file
         run: |
-          export FOO=${{ steps.yaml2json.outputs.data }}
-          echo $FOO
+          echo ${{ steps.yaml2json.outputs.data }}
+          echo "CONFIG=${{ steps.yaml2json.outputs.data }}" >> $GITHUB_ENV
       - name: find matches
         uses: actions/github-script@v4
         with:
@@ -32,12 +32,40 @@ jobs:
         uses: actions/github-script@v4
         with:
           script: |
-            github.pulls.createReviewComment({
-              pull_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: 'This is a fake comment',
-              commit_id: '${{ github.event.pull_request.head.sha }}',
-              position: 1,
-              path: "README.md"
+            const matchesPattern = (pattern, text) => {
+              const regex = new RegExp(pattern);
+              return !!text.match(regex)
+            }
+
+            const diff_url = context.payload.pull_request.diff_url
+            const files = await github.request(diff_url)
+            const file = files.data
+            let position = 0
+
+            file.split("\n").forEach((line) => {
+              if (line.startsWith("+")){
+                const addedLine = line.slice(1);
+                const matches = ${{ steps.yaml2json.outputs.data }}
+
+                for(const match of matches.matches){
+                  const commentText = match.comment ? match.comment : matches.defaults.comment;
+                  if (matchesPattern(match.regex, addedLine)){
+                    try {
+                        github.pulls.createReviewComment({
+                            pull_number: context.issue.number,
+                            owner: context.repo.owner,
+                            repo: context.repo.repo,
+                            body: (commentText + addedLine),
+                            commit_id: '${{ github.event.pull_request.head.sha }}',
+                            position: 1,
+                            path: "script.js"
+                        })
+                    } catch (error) {
+                        console.log('error getting yaml', error)
+                    }
+                  }
+                }
+
+              }
+              position += 1;
             })
