@@ -45,15 +45,15 @@ jobs:
             let filePath = ''
 
             file.split("\n").forEach((line) => {
-              if(line.includes("+++")){
-                let parts = line.split("b/")
-                const filePath  = parts.pop();
-                console.log("FILEM", filePath)
-              }
               if (line.startsWith("@@ ")){
                 position = 0
               }
               else if (line.startsWith("+")){
+                if(line.includes("+++")){
+                  let parts = line.split("b/")
+                  const filePath  = parts.pop();
+                  console.log("FILEM", filePath)
+                }
                 const addedLine = line.slice(1);
                 const matches = ${{ steps.yaml2json.outputs.data }}
 
