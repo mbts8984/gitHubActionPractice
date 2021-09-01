@@ -38,7 +38,6 @@ module.exports = async ({github, context}) => {
             console.log('error getting yaml', error)
     }}
     let config = getValues()
-    dangerNoodle
     const matchesPattern = (pattern, text) => {
         const regex = new RegExp(pattern);
         return !!text.match(regex)
@@ -57,7 +56,7 @@ module.exports = async ({github, context}) => {
 
     // )
     
-
+    tacoCat
     let position = 0
     file.split("\n").forEach((line) => {
         // console.log('made it inloop', line)
