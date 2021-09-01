@@ -44,7 +44,7 @@ jobs:
             let position = 0
 
             file.split("\n").forEach((line) => {
-              if(line.includes("b/")){
+              if(line.includes("b/", "\n")){
                 console.log("Found the file", line)
               }
               if (line.startsWith("@@ ")){
