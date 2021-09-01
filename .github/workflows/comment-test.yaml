@@ -42,12 +42,13 @@ jobs:
             const file = files.data
             console.log("DIFF ", files)
             let position = 0
+            let filePath = ''
 
             file.split("\n").forEach((line) => {
               if(line.includes("+++")){
                 let parts = line.split("b/")
-                const file  = parts.pop();
-                console.log("FILEM", file)
+                const filePath  = parts.pop();
+                console.log("FILEM", filePath)
               }
               if (line.startsWith("@@ ")){
                 position = 0
@@ -68,7 +69,7 @@ jobs:
                             body: (commentText + addedLine),
                             commit_id: '${{ github.event.pull_request.head.sha }}',
                             position: position,
-                            path: "script.js"
+                            path: filePath
                         })
                     } catch (error) {
                         console.log('error getting yaml', error)
