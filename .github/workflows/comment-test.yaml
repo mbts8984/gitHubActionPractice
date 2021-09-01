@@ -51,7 +51,7 @@ jobs:
               else if (line.startsWith("+")){
                 if(line.includes("+++")){
                   let parts = line.split("b/")
-                  const filePath  = parts.pop();
+                  filePath  = parts.pop();
                   console.log("FILEPATH", filePath)
                 }
                 const addedLine = line.slice(1);
