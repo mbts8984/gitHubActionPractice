@@ -40,11 +40,20 @@ jobs:
             const diff_url = context.payload.pull_request.diff_url
             const files = await github.request(diff_url)
             const file = files.data
-            console.log("DIFF ", file)
+            console.log("DIFF ", files)
             let position = 0
+            let filePath = ''
 
             file.split("\n").forEach((line) => {
-              if (line.startsWith("+")){
+              if (line.startsWith("@@ ")){
+                position = 0
+              }
+              else if (line.startsWith("+")){
+                if(line.includes("+++")){
+                  let parts = line.split("b/")
+                  const filePath  = parts.pop();
+                  console.log("FILEM", filePath)
+                }
                 const addedLine = line.slice(1);
                 const matches = ${{ steps.yaml2json.outputs.data }}
 
@@ -60,7 +69,7 @@ jobs:
                             body: (commentText + addedLine),
                             commit_id: '${{ github.event.pull_request.head.sha }}',
                             position: position,
-                            path: "script.js"
+                            path: filePath
                         })
                     } catch (error) {
                         console.log('error getting yaml', error)
