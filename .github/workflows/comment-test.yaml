@@ -44,45 +44,22 @@ jobs:
             let position = 0
             let filePath = ''
 
-            file.split("\n").forEach((line) => {
-              if (line.startsWith("@@ ")){
-                position = 0
-              }
-              else if (line.startsWith("+")){
-                if(line.includes("+++")){
-                  let parts = line.split("b/")
-                  filePath  = parts.pop();
-                  console.log("FILEPATH", filePath)
-                }
-                const addedLine = line.slice(1);
-                const matches = ${{ steps.yaml2json.outputs.data }}
 
-                for(const match of matches.matches){
-                  const commentText = match.comment ? match.comment : matches.defaults.comment;
-                  if (matchesPattern(match.regex, addedLine)){
-                    console.log("Commenting " + commentText + addedLine + "position : ", position)
-                    try {
-                        github.pulls.createReview({
-                            owner: context.repo.owner,
-                            repo: context.repo.repo,
-                            pull_number: context.issue.number,
-                            commit_id: '${{ github.event.pull_request.head.sha }}',
-                            body: (commentText + addedLine),
-                            event: "COMMENT",
-                            comments: [
-                              {
-                                path: filePath,
-                                position: position,
-                                body: (commentText + addedLine),
-                              }
-                            ],
-                        })
-                    } catch (error) {
-                        console.log('error getting yaml', error)
-                    }
-                  }
-                }
-
-              }
-              position += 1;
-            })
+            try {
+                github.pulls.createReview({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: context.issue.number,
+                    commit_id: '${{ github.event.pull_request.head.sha }}',
+                    event: "COMMENT",
+                    comments: [
+                      {
+                        path: "README.md",
+                        position: 3,
+                        body: "dummy comment SEE I WORK",,
+                      }
+                    ],
+                })
+            } catch (error) {
+                console.log('error getting yaml', error)
+            }
