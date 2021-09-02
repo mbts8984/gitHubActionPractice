@@ -62,14 +62,20 @@ jobs:
                   if (matchesPattern(match.regex, addedLine)){
                     console.log("Commenting " + commentText + addedLine + "position : ", position)
                     try {
-                        github.pulls.createReviewComment({
-                            pull_number: context.issue.number,
+                        github.pulls.createReview({
                             owner: context.repo.owner,
                             repo: context.repo.repo,
-                            body: (commentText + addedLine),
+                            pull_number: context.issue.number,
                             commit_id: '${{ github.event.pull_request.head.sha }}',
-                            position: position,
-                            path: filePath
+                            body: (commentText + addedLine),
+                            event: COMMENT,
+                            comments: [
+                              {
+                                path: filePath,
+                                position: position,
+                                body: (commentText + addedLine),
+                              }
+                            ],
                         })
                     } catch (error) {
                         console.log('error getting yaml', error)
