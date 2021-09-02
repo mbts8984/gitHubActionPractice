@@ -43,23 +43,47 @@ jobs:
             console.log("DIFF ", files)
             let position = 0
             let filePath = ''
+            let arrayOfComments = []
 
+            file.split("\n").forEach((line) => {
+              if (line.startsWith("@@ ")){
+                position = 0
+              }
+              else if (line.startsWith("+")){
+                if(line.includes("+++")){
+                  let parts = line.split("b/")
+                  filePath  = parts.pop();
+                  console.log("FILEPATH", filePath)
+                }
+                const addedLine = line.slice(1);
+                const matches = ${{ steps.yaml2json.outputs.data }}
 
+                for(const match of matches.matches){
+                  const commentText = match.comment ? match.comment : matches.defaults.comment;
+                  if (matchesPattern(match.regex, addedLine)){
+                    singleComment = {
+                      path: filePath,
+                      position: position,
+                      body: (commentText + addedLine)
+                    }
+                    arrayOfComments.push(singleComment)
+                    console.log("ARRAY OF COMMENTS ", arrayOfComments)
+                  }
+                }
+
+              }
+              position += 1;
+            })
             try {
-                github.pulls.createReview({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    pull_number: context.issue.number,
-                    commit_id: '${{ github.event.pull_request.head.sha }}',
-                    event: "COMMENT",
-                    comments: [
-                      {
-                        path: "README.md",
-                        position: 3,
-                        body: "dummy comment SEE I WORK"
-                      }
-                    ]
-                })
-            } catch (error) {
-                console.log('error getting yaml', error)
-            }
+                  github.pulls.createReview({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      pull_number: context.issue.number,
+                      commit_id: '${{ github.event.pull_request.head.sha }}',
+                      body: (commentText + addedLine),
+                      event: "COMMENT",
+                      comments: arrayOfComments,
+                  })
+              } catch (error) {
+                  console.log('error getting yaml', error)
+              }
