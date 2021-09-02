@@ -60,6 +60,7 @@ jobs:
 
                 for(const match of matches.matches){
                   const commentText = match.comment ? match.comment : matches.defaults.comment;
+                  echo commentText
                   if (matchesPattern(match.regex, addedLine)){
                     singleComment = {
                       path: filePath,
@@ -80,7 +81,6 @@ jobs:
                       repo: context.repo.repo,
                       pull_number: context.issue.number,
                       commit_id: '${{ github.event.pull_request.head.sha }}',
-                      body: (commentText + addedLine),
                       event: "COMMENT",
                       comments: arrayOfComments,
                   })
