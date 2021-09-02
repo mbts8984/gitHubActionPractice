@@ -56,9 +56,9 @@ jobs:
                       {
                         path: "README.md",
                         position: 3,
-                        body: "dummy comment SEE I WORK",,
+                        body: "dummy comment SEE I WORK"
                       }
-                    ],
+                    ]
                 })
             } catch (error) {
                 console.log('error getting yaml', error)
