@@ -68,7 +68,7 @@ jobs:
                             pull_number: context.issue.number,
                             commit_id: '${{ github.event.pull_request.head.sha }}',
                             body: (commentText + addedLine),
-                            event: COMMENT,
+                            event: "COMMENT",
                             comments: [
                               {
                                 path: filePath,
