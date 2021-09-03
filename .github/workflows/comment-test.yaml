@@ -30,10 +30,18 @@ jobs:
               return !!text.match(regex)
             }
 
+            const getBotComments = async (github, owner, repo, pullNumber) => {
+              let allComments = await github.pulls.listComments({
+                owner,
+                repo,
+                number: pullNumber
+              })
+              console.log('COMMENTS', allComments)
+            }
+
             const diff_url = context.payload.pull_request.diff_url
             const files = await github.request(diff_url)
             const file = files.data
-            console.log("DIFF ", files)
             let position = 0
             let filePath = ''
             let arrayOfComments = []
