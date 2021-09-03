@@ -29,15 +29,15 @@ jobs:
               const regex = new RegExp(pattern);
               return !!text.match(regex)
             }
+            console.log("LOGGGG ", github, context)
 
-            const getBotComments = async (github, owner, repo, pullNumber) => {
-              let allComments = await github.pulls.listComments({
+            github.pulls.listComments({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                number: pullNumber
+                number: context.issue.number
               })
-              console.log('COMMENTS', allComments)
-            }
+            console.log('COMMENTS', allComments)
+
 
             const commentAlreadyExists = (comments, position, potentialCommentText) => {
               return !!comments.find((comment) => {
@@ -49,12 +49,6 @@ jobs:
             const files = await github.request(diff_url)
             const file = files.data
 
-            const botComments = await getBotComments(
-              context.github,
-              owner,
-              repo,
-              pullNumber
-            )
 
             let position = 0
             let filePath = ''
