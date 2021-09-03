@@ -38,7 +38,7 @@ jobs:
             let filePath = ''
             let arrayOfComments = []
 
-            for(const line of file.split("\n")) => {
+            for(const line of file.split("\n")){
               if (line.startsWith("@@ ")){
                 position = 0
               }
