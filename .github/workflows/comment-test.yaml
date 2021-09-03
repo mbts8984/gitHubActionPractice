@@ -67,4 +67,4 @@ jobs:
 
               }
               position += 1;
-            })
+            }
