@@ -31,13 +31,16 @@ jobs:
             }
             console.log("LOGGGG ", context)
 
-            let allComments = github.pulls.listCommentsForReview({
+            let allComments = async () => {
+              const allComments =  await github.pulls.listCommentsForReview({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 number: context.issue.number,
                 review_id: context.pull_request
               })
-            console.log('COMMENTS', allComments)
+            }
+
+            console.log('COMMENTS', await allComments)
 
 
             const commentAlreadyExists = (comments, position, potentialCommentText) => {
