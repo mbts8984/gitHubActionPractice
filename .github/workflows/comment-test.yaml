@@ -31,7 +31,7 @@ jobs:
             }
             console.log("LOGGGG ", context)
 
-            github.pulls.listCommentsForReview({
+            let allComments = github.pulls.listCommentsForReview({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 number: context.issue.number,
