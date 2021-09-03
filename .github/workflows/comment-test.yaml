@@ -76,8 +76,7 @@ jobs:
               position += 1;
             })
 
-            console.log("made it to TRY")
-            github.pulls.createReview({
+            const createTheReviewComments = github.pulls.createReview({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
@@ -85,3 +84,4 @@ jobs:
                 event: "COMMENT",
                 comments: arrayOfComments[],
             })
+            createTheReviewComments()
