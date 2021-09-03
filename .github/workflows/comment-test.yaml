@@ -32,8 +32,8 @@ jobs:
 
             const getBotComments = async (github, owner, repo, pullNumber) => {
               let allComments = await github.pulls.listComments({
-                owner,
-                repo,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
                 number: pullNumber
               })
               console.log('COMMENTS', allComments)
