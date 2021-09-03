@@ -1,7 +1,8 @@
 defaults:
-  comment: "MATCHES BE HERE FOOL. LOOK."
+  comment: "MATCH MATCH MATCH. Default Comment"
 matches:
   - regex: ".*DANGEROUSLY_do_something*"
-  - regex: ".*tacoCat*" # no comment specified, uses default comment.
+    comment: "this thing is clearly dangerous. Dont be a dummy."
+  - regex: ".*tacoCat*"
+    comment: "taco cats arent real. Sorry to break the news to you"
   - regex: ".*dangerNoodle*"
-    comment: "dont talk about danger noodles"
