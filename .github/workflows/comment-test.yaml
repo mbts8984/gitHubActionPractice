@@ -74,5 +74,5 @@ jobs:
                 pull_number: context.issue.number,
                 commit_id: '${{ github.event.pull_request.head.sha }}',
                 event: "COMMENT",
-                comments: arrayOfComments[],
+                comments: arrayOfComments,
             })
