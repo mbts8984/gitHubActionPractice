@@ -39,9 +39,23 @@ jobs:
               console.log('COMMENTS', allComments)
             }
 
+            const commentAlreadyExists = (comments, position, potentialCommentText) => {
+              return !!comments.find((comment) => {
+                return comment.position === position && comment.body === potentialCommentText;
+              })
+            }
+
             const diff_url = context.payload.pull_request.diff_url
             const files = await github.request(diff_url)
             const file = files.data
+
+            const botComments = await getBotComments(
+              context.github,
+              owner,
+              repo,
+              pullNumber
+            )
+
             let position = 0
             let filePath = ''
             let arrayOfComments = []
@@ -69,7 +83,6 @@ jobs:
                       body: (commentText + addedLine)
                     }
                     arrayOfComments.push(singleComment)
-                    console.log("ARRAY OF COMMENTS ", arrayOfComments)
                   }
                 }
 
