@@ -29,13 +29,13 @@ jobs:
               const regex = new RegExp(pattern);
               return !!text.match(regex)
             }
-            console.log("LOGGGG ", github, context)
+            console.log("LOGGGG ", context)
 
             github.pulls.listCommentsForReview({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 number: context.issue.number,
-                review_id: context.pull_request.id
+                review_id: context.pull_request
               })
             console.log('COMMENTS', allComments)
 
