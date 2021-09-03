@@ -9,6 +9,3 @@ asdfTest
 dogPop
 tigerCider
 pothos
-
-dangerNoodle
-tacoCat
