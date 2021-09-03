@@ -20,13 +20,6 @@ jobs:
         run: |
           echo ${{ steps.yaml2json.outputs.data }}
           echo "CONFIG=${{ steps.yaml2json.outputs.data }}" >> $GITHUB_ENV
-      - name: find matches
-        uses: actions/github-script@v4
-        with:
-          script: |
-            const diff_url = context.payload.pull_request.diff_url
-            const files = await github.request(diff_url)
-            const file = files.data
 
       - name: make comment
         uses: actions/github-script@v4
@@ -37,22 +30,32 @@ jobs:
               return !!text.match(regex)
             }
 
+            const getBotComments = async (github, owner, repo, pullNumber) => {
+              let allComments = await github.pulls.listComments({
+                owner,
+                repo,
+                number: pullNumber
+              })
+              console.log('COMMENTS', allComments)
+            }
+
             const diff_url = context.payload.pull_request.diff_url
             const files = await github.request(diff_url)
             const file = files.data
-            console.log("DIFF ", files)
             let position = 0
             let filePath = ''
+            let arrayOfComments = []
 
-            file.split("\n").forEach((line) => {
+
+            for(const line of file.split("\n")){
               if (line.startsWith("@@ ")){
                 position = 0
               }
               else if (line.startsWith("+")){
                 if(line.includes("+++")){
                   let parts = line.split("b/")
-                  const filePath  = parts.pop();
-                  console.log("FILEM", filePath)
+                  filePath  = parts.pop();
+                  console.log("FILEPATH", filePath)
                 }
                 const addedLine = line.slice(1);
                 const matches = ${{ steps.yaml2json.outputs.data }}
@@ -60,23 +63,24 @@ jobs:
                 for(const match of matches.matches){
                   const commentText = match.comment ? match.comment : matches.defaults.comment;
                   if (matchesPattern(match.regex, addedLine)){
-                    console.log("Commenting " + commentText + addedLine + "position : ", position)
-                    try {
-                        github.pulls.createReviewComment({
-                            pull_number: context.issue.number,
-                            owner: context.repo.owner,
-                            repo: context.repo.repo,
-                            body: (commentText + addedLine),
-                            commit_id: '${{ github.event.pull_request.head.sha }}',
-                            position: position,
-                            path: filePath
-                        })
-                    } catch (error) {
-                        console.log('error getting yaml', error)
+                    singleComment = {
+                      path: filePath,
+                      position: position,
+                      body: (commentText + addedLine)
                     }
+                    arrayOfComments.push(singleComment)
+                    console.log("ARRAY OF COMMENTS ", arrayOfComments)
                   }
                 }
 
               }
               position += 1;
+            }
+            github.pulls.createReview({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+                commit_id: '${{ github.event.pull_request.head.sha }}',
+                event: "COMMENT",
+                comments: arrayOfComments,
             })

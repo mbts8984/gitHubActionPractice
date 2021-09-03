@@ -19,7 +19,6 @@ const fs = require('fs')
 //     })
 // }
 "look at me! I changed!"
-tacoCat
 
 module.exports = async ({github, context}) => {
     const ownerRef = context.repo.owner;
@@ -38,7 +37,6 @@ module.exports = async ({github, context}) => {
             console.log('error getting yaml', error)
     }}
     let config = getValues()
-    dangerNoodle
     const matchesPattern = (pattern, text) => {
         const regex = new RegExp(pattern);
         return !!text.match(regex)
@@ -57,7 +55,6 @@ module.exports = async ({github, context}) => {
 
     // )
     
-
     let position = 0
     file.split("\n").forEach((line) => {
         // console.log('made it inloop', line)
