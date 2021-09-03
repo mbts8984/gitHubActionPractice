@@ -38,6 +38,7 @@ jobs:
             let filePath = ''
             let arrayOfComments = []
 
+
             for(const line of file.split("\n")){
               if (line.startsWith("@@ ")){
                 position = 0
@@ -53,7 +54,6 @@ jobs:
 
                 for(const match of matches.matches){
                   const commentText = match.comment ? match.comment : matches.defaults.comment;
-                  echo commentText
                   if (matchesPattern(match.regex, addedLine)){
                     singleComment = {
                       path: filePath,
