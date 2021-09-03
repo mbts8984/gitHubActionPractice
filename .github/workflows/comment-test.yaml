@@ -20,13 +20,6 @@ jobs:
         run: |
           echo ${{ steps.yaml2json.outputs.data }}
           echo "CONFIG=${{ steps.yaml2json.outputs.data }}" >> $GITHUB_ENV
-      - name: find matches
-        uses: actions/github-script@v4
-        with:
-          script: |
-            const diff_url = context.payload.pull_request.diff_url
-            const files = await github.request(diff_url)
-            const file = files.data
 
       - name: make comment
         uses: actions/github-script@v4
@@ -76,7 +69,7 @@ jobs:
               position += 1;
             })
 
-            const createTheReviewComments = github.pulls.createReview({
+            await github.pulls.createReview({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
@@ -84,4 +77,3 @@ jobs:
                 event: "COMMENT",
                 comments: arrayOfComments[],
             })
-            createTheReviewComments()
