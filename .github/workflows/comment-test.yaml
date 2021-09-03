@@ -38,7 +38,7 @@ jobs:
             let filePath = ''
             let arrayOfComments = []
 
-            file.split("\n").forEach((line) => {
+            for(const line of file.split("\n")) => {
               if (line.startsWith("@@ ")){
                 position = 0
               }
@@ -69,7 +69,7 @@ jobs:
               position += 1;
             })
 
-            await github.pulls.createReview({
+            github.pulls.createReview({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
