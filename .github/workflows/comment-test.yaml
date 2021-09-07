@@ -39,7 +39,7 @@ jobs:
                 pull_number: context.issue.number,
                 review_id: context.payload.pull_request.id
               })
-              console.log('COMMENTS', allComments)
+              console.log('COMMENTS', allComments.data)
             }
             allCommentsPrint()
 
