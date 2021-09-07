@@ -33,12 +33,12 @@ jobs:
             // console.log("LOGGGG ", context)
             console.log("IDIDID ", context.payload.pull_request.id)
 
-            let getBotComments = async () => {
+            let getBotComments = async (github, owner, repo, pullNumber, reviewId) => {
               const allComments =  await github.pulls.listReviews({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.issue.number,
-                review_id: context.payload.pull_request.id
+                owner,
+                repo,
+                pull_number: pullNumber,
+                review_id: reviewId
               })
               return allComments.data.filter((comment) => {
                 console.log("IDName: ", comment.user.login)
@@ -47,9 +47,10 @@ jobs:
 
             const botComments = await getBotComments(
               context.github,
-              owner,
-              repo,
-              pullNumber
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pullNumber: context.issue.number,
+              reviewId: context.payload.pull_request.id
             )
 
 
