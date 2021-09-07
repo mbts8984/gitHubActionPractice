@@ -50,3 +50,14 @@ jobs:
                 return comment.position === position && comment.body === potentialCommentText;
               })
             }
+
+            const diff_url = context.payload.pull_request.diff_url
+            const files = await github.request(diff_url)
+            const file = files.data
+            const botComments = await getBotComments(
+              context.github,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pullNumber: context.issue.number,
+              reviewId: context.payload.pull_request.id
+            )
