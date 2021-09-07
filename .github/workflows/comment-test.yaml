@@ -29,14 +29,13 @@ jobs:
               const regex = new RegExp(pattern);
               return !!text.match(regex)
             }
-            // console.log("LOGGGG ", context)
+            console.log("LOGGGG ", context)
 
             let allCommentsPrint = async () => {
-              const allComments =  await github.pulls.listCommentsForReview({
+              const allComments =  await github.pulls.get({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
-                review_id: context.issue.number
               })
               console.log('COMMENTS', allComments)
             }
