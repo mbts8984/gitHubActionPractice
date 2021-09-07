@@ -29,7 +29,7 @@ jobs:
               const regex = new RegExp(pattern);
               return !!text.match(regex)
             }
-            console.log("LOGGGG ", context)
+            # console.log("LOGGGG ", context)
 
             let allCommentsPrint = async () => {
               const allComments =  await github.pulls.listCommentsForReview({
@@ -38,9 +38,8 @@ jobs:
                 number: context.issue.number,
                 review_id: context.pull_request
               })
+              console.log('COMMENTS', allComments)
             }
-
-            console.log('COMMENTS', allCommentsPrint)
 
 
             const commentAlreadyExists = (comments, position, potentialCommentText) => {
