@@ -34,8 +34,8 @@ jobs:
 
             let getBotComments = async (github, owner, repo, pullNumber, reviewId) => {
               const allComments =  await github.pulls.listReviews({
-                owner,
-                repo,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
                 pull_number: pullNumber,
                 review_id: reviewId
               })
@@ -54,6 +54,13 @@ jobs:
             const diff_url = context.payload.pull_request.diff_url
             const files = await github.request(diff_url)
             const file = files.data
+            const botComments = await getBotComments(
+              context.github,
+              owner,
+              repo,
+              pullNumber: context.issue.number,
+              reviewId: context.payload.pull_request.id
+            )
 
             let position = 0
             let filePath = ''
