@@ -36,7 +36,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
-                review_id: context.id
+                review_id: '746289649'
               })
               console.log('COMMENTS', allComments)
             }
