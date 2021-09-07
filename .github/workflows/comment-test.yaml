@@ -54,3 +54,52 @@ jobs:
             const diff_url = context.payload.pull_request.diff_url
             const files = await github.request(diff_url)
             const file = files.data
+            const botComments = await getBotComments(
+              context.github,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pullNumber: context.issue.number,
+              reviewId: context.payload.pull_request.id
+            )
+
+            let position = 0
+            let filePath = ''
+            let arrayOfComments = []
+
+
+            for(const line of file.split("\n")){
+              if (line.startsWith("@@ ")){
+                position = 0
+              }
+              else if (line.startsWith("+")){
+                if(line.includes("+++")){
+                  let parts = line.split("b/")
+                  filePath  = parts.pop();
+                  console.log("FILEPATH", filePath)
+                }
+                const addedLine = line.slice(1);
+                const matches = ${{ steps.yaml2json.outputs.data }}
+
+                for(const match of matches.matches){
+                  const commentText = match.comment ? match.comment : matches.defaults.comment;
+                  if (matchesPattern(match.regex, addedLine)) {
+                    singleComment = {
+                      path: filePath,
+                      position: position,
+                      body: (commentText + addedLine)
+                    }
+                    arrayOfComments.push(singleComment)
+                  }
+                }
+
+              }
+              position += 1;
+            }
+            github.pulls.createReview({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+                commit_id: '${{ github.event.pull_request.head.sha }}',
+                event: "COMMENT",
+                comments: arrayOfComments,
+            })
