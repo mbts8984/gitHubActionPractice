@@ -26,12 +26,11 @@ jobs:
         with:
           script: |
             let BOT_NAME = 'github-actions[bot]'
+
             const matchesPattern = (pattern, text) => {
               const regex = new RegExp(pattern);
               return !!text.match(regex)
             }
-            // console.log("LOGGGG ", context)
-            console.log("IDIDID ", context.payload.pull_request.id)
 
             let getBotComments = async (github, owner, repo, pullNumber, reviewId) => {
               const allComments =  await github.pulls.listReviews({
@@ -45,14 +44,6 @@ jobs:
                 return comment.user.login === BOT_NAME })
             }
 
-            const botComments = await getBotComments(
-              context.github,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pullNumber: context.issue.number,
-              reviewId: context.payload.pull_request.id
-            )
-
 
             const commentAlreadyExists = (comments, position, potentialCommentText) => {
               return !!comments.find((comment) => {
@@ -63,7 +54,13 @@ jobs:
             const diff_url = context.payload.pull_request.diff_url
             const files = await github.request(diff_url)
             const file = files.data
-
+            const botComments = await getBotComments(
+              context.github,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pullNumber: context.issue.number,
+              reviewId: context.payload.pull_request.id
+            )
 
             let position = 0
             let filePath = ''
@@ -85,7 +82,7 @@ jobs:
 
                 for(const match of matches.matches){
                   const commentText = match.comment ? match.comment : matches.defaults.comment;
-                  if (matchesPattern(match.regex, addedLine) && !commentAlreadyExists(botComments, position, commentText) ){
+                  if (matchesPattern(match.regex, addedLine) && !commentAlreadyExists(botComments, position, commentText)){
                     singleComment = {
                       path: filePath,
                       position: position,
