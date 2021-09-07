@@ -35,12 +35,11 @@ jobs:
               const allComments =  await github.pulls.listCommentsForReview({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                number: context.issue.number,
-                review_id: context.pull_request
+                pull_number: context.issue.number,
               })
               console.log('COMMENTS', allComments)
             }
-
+            allCommentsPrint()
 
             const commentAlreadyExists = (comments, position, potentialCommentText) => {
               return !!comments.find((comment) => {
