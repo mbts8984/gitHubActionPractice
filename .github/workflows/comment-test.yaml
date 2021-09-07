@@ -40,7 +40,7 @@ jobs:
               })
             }
 
-            console.log('COMMENTS', await allCommentsPrint)
+            console.log('COMMENTS', allCommentsPrint)
 
 
             const commentAlreadyExists = (comments, position, potentialCommentText) => {
