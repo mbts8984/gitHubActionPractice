@@ -30,7 +30,7 @@ jobs:
               return !!text.match(regex)
             }
             console.log("LOGGGG ", context)
-            console.log("IDIDID ", context.payload)
+            console.log("IDIDID ", context.payload.pull_request)
             let allCommentsPrint = async () => {
               const allComments =  await github.pulls.listReviews({
                 owner: context.repo.owner,
