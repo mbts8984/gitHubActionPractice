@@ -32,10 +32,11 @@ jobs:
             // console.log("LOGGGG ", context)
 
             let allCommentsPrint = async () => {
-              const allComments =  await github.pulls.listReviews({
+              const allComments =  await github.pulls.listCommentsForReview({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
+                review_id: context.issue.number
               })
               console.log('COMMENTS', allComments)
             }
