@@ -32,17 +32,18 @@ jobs:
             console.log("LOGGGG ", context)
 
             let allCommentsPrint = async () => {
-              const allComments =  await github.pulls.get({
+              const allComments =  await github.pulls.listCommentsForReview({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
+                review_id: context.repo.id
               })
               console.log('COMMENTS', allComments)
             }
             allCommentsPrint()
 
-            const commentAlreadyExists = (comments, position, potentialCommentText) => {
-              return !!comments.find((comment) => {
-                return comment.position === position && comment.body === potentialCommentText;
-              })
-            }
+            // const commentAlreadyExists = (comments, position, potentialCommentText) => {
+            //   return !!comments.find((comment) => {
+            //     return comment.position === position && comment.body === potentialCommentText;
+            //   })
+            // }
