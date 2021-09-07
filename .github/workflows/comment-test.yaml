@@ -29,7 +29,7 @@ jobs:
               const regex = new RegExp(pattern);
               return !!text.match(regex)
             }
-            console.log("LOGGGG ", github)
+            console.log("LOGGGG ", context)
 
             let allCommentsPrint = async () => {
               const allComments =  await github.pulls.listCommentsForReview({
