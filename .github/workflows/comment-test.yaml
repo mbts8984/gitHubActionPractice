@@ -45,7 +45,8 @@ jobs:
             }
 
 
-            const commentAlreadyExists = (comments, position, potentialCommentText) => {
+            const commentAlreadyExists = (comments, position, potentialCommentText) => { 
+              console.log("COMMERTS ", comments)
               return !!comments.find((comment) => {
                 return comment.position === position && comment.body === potentialCommentText;
               })
@@ -54,14 +55,14 @@ jobs:
             const diff_url = context.payload.pull_request.diff_url
             const files = await github.request(diff_url)
             const file = files.data
-            const botComments = await getBotComments(
-              context.github,
-              owner,
-              repo,
-              pullNumber: context.issue.number,
-              reviewId: context.payload.pull_request.id
-            )
-            console.log("BOTCOMS ", botComments)
+            // const botComments = await getBotComments(
+            //   context.github,
+            //   owner,
+            //   repo,
+            //   pullNumber: context.issue.number,
+            //   reviewId: context.payload.pull_request.id
+            // )
+
 
             let position = 0
             let filePath = ''
