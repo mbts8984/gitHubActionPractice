@@ -47,8 +47,8 @@ jobs:
             }
             getBotComments()
 
-            // const commentAlreadyExists = (comments, position, potentialCommentText) => {
-            //   return !!comments.find((comment) => {
-            //     return comment.position === position && comment.body === potentialCommentText;
-            //   })
-            // }
+            const commentAlreadyExists = (comments, position, potentialCommentText) => {
+              return !!comments.find((comment) => {
+                return comment.position === position && comment.body === potentialCommentText;
+              })
+            }
