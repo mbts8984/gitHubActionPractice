@@ -56,12 +56,16 @@ jobs:
                 review_id: reviewId
               })
               console.log("HEREEEE: ", allComments.data)
+              let comment = {
+                position: allComments.data.position,
+                body: allComments.data.body,
+                commenter: allComments.data.user.login
+              }
+              commentAlreadyExists(comment)
             }
 
             getReview()
 
-            const commentAlreadyExists = (comments, position, potentialCommentText) => {
-              return !!comments.find((comment) => {
-                return comment.position === position && comment.body === potentialCommentText;
-              })
+            const commentAlreadyExists = (comments) => {
+              console.log("made it to CommentAlreadyExists")
             }
