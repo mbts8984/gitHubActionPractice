@@ -40,7 +40,7 @@ jobs:
                 pull_number: context.issue.number,
                 review_id: context.payload.pull_request.id
               })
-              console.log("HEREEE: ", allComments)
+              console.log("HEREEEE: ", allComments)
               
               return allComments.data.filter((comment) => {
                 console.log("IDName: ", comment.user.login)
