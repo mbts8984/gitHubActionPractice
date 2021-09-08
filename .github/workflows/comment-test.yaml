@@ -43,7 +43,6 @@ jobs:
               return allReviews.data.filter((comment) => {
                 // console.log("IDName: ", comment)
                 let review_id = comment.id
-                console.log("reviewerree ", review_id)
                 getTheCommentsGod(review_id)
                 BOT_NAME = comment.user.login})
             }
@@ -56,9 +55,11 @@ jobs:
                 review_id: reviewId
               })
               console.log("HEREEEE: ", allComments.data)
+              let posit = allComments.data.position
+              let bodbod = allComments.data.body
               let comment = {
-                position: allComments.data.position,
-                body: allComments.data.body,
+                position: posit,
+                body: bodbod,
                 BOT_NAME
               }
               commentAlreadyExists(comment)
@@ -66,6 +67,8 @@ jobs:
 
             getReview()
 
-            const commentAlreadyExists = (commentstest) => {
-              console.log("made it to CommentAlreadyExists", commentstest)
+            const commentAlreadyExists = (comments) => {
+              return !!comments.find((comment) => {
+                return comment.position === position && comment.body === potentialCommentText;
+              })
             }
