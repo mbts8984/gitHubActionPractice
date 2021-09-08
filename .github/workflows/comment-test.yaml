@@ -32,13 +32,13 @@ jobs:
               return !!text.match(regex)
             }
 
-            let getBotComments = async (github, owner, repo, pullNumber, reviewId) => {
+            let getBotComments = async () => {
               const allComments =  await github.pulls.listReviews({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                pull_number: pullNumber,
-                review_id: reviewId
-              }
+                pull_number: context.issue.number,
+                review_id: context.payload.pull_request.id
+              })
               console.log("HEREEE: ", allComments)
               )
               return allComments.data.filter((comment) => {
