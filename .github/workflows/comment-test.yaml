@@ -39,7 +39,6 @@ jobs:
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
               })
-             // console.log("HEREEEE: ", allReviews)
               
               return allReviews.data.filter((comment) => {
                 // console.log("IDName: ", comment)
@@ -50,15 +49,15 @@ jobs:
             }
 
             getTheCommentsGod = async (reviewId) => {
-              console.log("made it to getTheCommentsGod")
               const allComments =  await github.pulls.listCommentsForReview({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
                 review_id: reviewId
               })
-              console.log("HEREEEE: ", allComments)
+              console.log("HEREEEE: ", allComments.data)
             }
+
             getReview()
 
             const commentAlreadyExists = (comments, position, potentialCommentText) => {
