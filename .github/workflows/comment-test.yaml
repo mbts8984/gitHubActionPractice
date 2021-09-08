@@ -41,7 +41,7 @@ jobs:
               })
               console.log("HEREEEE: ", allComments)
               review_id = allcomments.data
-              console.log("Reveiwer: ", review_id)
+              console.log("Revddeiwer: ", review_id)
               return allComments.data.filter((comment) => {
                 console.log("IDName: ", comment.user.login)
                 return comment.user.login === BOT_NAME })
