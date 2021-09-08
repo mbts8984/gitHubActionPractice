@@ -31,10 +31,10 @@ jobs:
               const regex = new RegExp(pattern);
               return !!text.match(regex)
             }
-            console.log("STUFF: ", context)
+            console.log("STUFF: ", context.payload.pull_request.id)
 
             let getBotComments = async () => {
-              const allComments =  await github.pulls.listCommentsForReview({
+              const allComments =  await github.pulls.listReviews({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
