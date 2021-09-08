@@ -55,7 +55,7 @@ jobs:
                 pull_number: context.issue.number,
                 review_id: reviewId
               })
-              console.log("HEREEEE: ", json.parse(allComments.data.position))
+              console.log("HEREEEE: ", json.parse(allComments.data))
               
               let comment = {
                 position: allComments.data.position,
