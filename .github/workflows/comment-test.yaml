@@ -31,7 +31,7 @@ jobs:
               const regex = new RegExp(pattern);
               return !!text.match(regex)
             }
-            console.log("STUFF: ", context.payload.pull_request.id)
+            console.log("STUFF: ", context)
 
             let getBotComments = async () => {
               const allComments =  await github.pulls.listReviews({
