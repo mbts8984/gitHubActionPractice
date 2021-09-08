@@ -43,6 +43,8 @@ jobs:
               
               return allComments.data.filter((comment) => {
                 console.log("IDName: ", comment)
+                let review_id = comment.id
+                console.log("reviewerree ", review_id)
                 return comment.user.login === BOT_NAME })
             }
             getBotComments()
