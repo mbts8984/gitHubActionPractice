@@ -33,7 +33,7 @@ jobs:
             }
 
             let getBotComments = async () => {
-              const allComments =  await github.pulls.listReviews({
+              const allComments =  await github.pulls.listCommentsForReview({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
