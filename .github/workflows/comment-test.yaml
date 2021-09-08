@@ -26,28 +26,39 @@ jobs:
         with:
           script: |
             let BOT_NAME = 'github-actions[bot]'
-
+            let review_id = ''
             const matchesPattern = (pattern, text) => {
               const regex = new RegExp(pattern);
               return !!text.match(regex)
             }
             // console.log("STUFF: ", context)
 
-            let getBotComments = async () => {
-              const allComments =  await github.pulls.listReviews({
+            let getReview = async () => {
+              const allReviews =  await github.pulls.listReviews({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
               })
-              console.log("HEREEEE: ", allComments)
+             // console.log("HEREEEE: ", allReviews)
               
-              return allComments.data.filter((comment) => {
+              return allReviews.data.filter((comment) => {
                 console.log("IDName: ", comment)
                 let review_id = comment.id
                 console.log("reviewerree ", review_id)
+                getTheCommentsGod(review_id)
                 return comment.user.login === BOT_NAME })
             }
-            getBotComments()
+
+            getTheCommentsGod = async (reviewId) => {
+              console.log("made it to getTheCommentsGod")
+              const allComments =  await github.pulls.listCommentsForReview({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+                review_id: reviewId
+              })
+            }
+            getReview()
 
             const commentAlreadyExists = (comments, position, potentialCommentText) => {
               return !!comments.find((comment) => {
