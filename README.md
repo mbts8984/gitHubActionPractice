@@ -8,6 +8,5 @@ asdfTest
 
 dogPop
 tigerCider
-pothos
 
 dangerNoodle
