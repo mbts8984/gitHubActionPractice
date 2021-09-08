@@ -31,7 +31,7 @@ jobs:
               const regex = new RegExp(pattern);
               return !!text.match(regex)
             }
-            console.log("STUFF: ", context)
+            // console.log("STUFF: ", context)
 
             let getBotComments = async () => {
               const allComments =  await github.pulls.listReviews({
@@ -40,7 +40,8 @@ jobs:
                 pull_number: context.issue.number,
               })
               console.log("HEREEEE: ", allComments)
-              
+              review_id = allcomments.data
+              console.log("Reveiwer: ", review_id)
               return allComments.data.filter((comment) => {
                 console.log("IDName: ", comment.user.login)
                 return comment.user.login === BOT_NAME })
