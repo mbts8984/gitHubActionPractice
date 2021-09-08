@@ -40,10 +40,9 @@ jobs:
                 pull_number: context.issue.number,
               })
               console.log("HEREEEE: ", allComments)
-              review_id = allcomments.data
-              console.log("Revddeiwer: ", review_id)
+              
               return allComments.data.filter((comment) => {
-                console.log("IDName: ", comment.user.login)
+                console.log("IDName: ", comment)
                 return comment.user.login === BOT_NAME })
             }
             getBotComments()
