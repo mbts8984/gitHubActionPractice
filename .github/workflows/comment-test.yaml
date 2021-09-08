@@ -26,6 +26,7 @@ jobs:
         with:
           script: |
             let BOT_NAME = 'github-actions[bot]'
+
             let review_id = ''
             const matchesPattern = (pattern, text) => {
               const regex = new RegExp(pattern);
@@ -54,7 +55,7 @@ jobs:
                 pull_number: context.issue.number,
                 review_id: reviewId
               })
-              console.log("HEREEEE: ", allComments.data)
+              console.log("HEREEEE: ", typeof allComments.data)
               
               let comment = {
                 position: allComments.data.position,
@@ -75,6 +76,7 @@ jobs:
             let position = 0
             let filePath = ''
             let arrayOfComments = []
+
             for(const line of file.split("\n")){
               if (line.startsWith("@@ ")){
                 position = 0
