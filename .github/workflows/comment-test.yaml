@@ -27,29 +27,90 @@ jobs:
           script: |
             let BOT_NAME = 'github-actions[bot]'
 
+            let review_id = ''
             const matchesPattern = (pattern, text) => {
               const regex = new RegExp(pattern);
               return !!text.match(regex)
             }
-            console.log("STUFF: ", context)
+            // console.log("STUFF: ", context)
 
-            let getBotComments = async () => {
-              const allComments =  await github.pulls.listReviews({
+            let getReview = async () => {
+              const allReviews =  await github.pulls.listReviews({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
-                review_id: context.payload.pull_request.id
               })
-              console.log("HEREEE: ", allComments)
               
-              return allComments.data.filter((comment) => {
-                console.log("IDName: ", comment.user.login)
-                return comment.user.login === BOT_NAME })
+              return allReviews.data.filter((comment) => {
+                // console.log("IDName: ", comment)
+                let review_id = comment.id
+                getTheCommentsGod(review_id)
+                BOT_NAME = comment.user.login})
             }
-            getBotComments()
 
-            const commentAlreadyExists = (comments, position, potentialCommentText) => {
-              return !!comments.find((comment) => {
-                return comment.position === position && comment.body === potentialCommentText;
+            getTheCommentsGod = async (reviewId) => {
+              const allComments =  await github.pulls.listCommentsForReview({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+                review_id: reviewId
               })
+              console.log("HEREEEE: ", allComments.data)
+              
+              let comment = {
+                position: allComments.data.position,
+                body: allComments.data.body,
+                BOT_NAME
+              }
             }
+
+            getReview()
+
+            const commentAlreadyExists = (comments) => {
+              // code here
+              console.log('Made it to commentAlreadyExists')
+            }
+            const diff_url = context.payload.pull_request.diff_url
+            const files = await github.request(diff_url)
+            const file = files.data
+            let position = 0
+            let filePath = ''
+            let arrayOfComments = []
+
+            for(const line of file.split("\n")){
+              if (line.startsWith("@@ ")){
+                position = 0
+              }
+              else if (line.startsWith("+")){
+                if(line.includes("+++")){
+                  let parts = line.split("b/")
+                  filePath  = parts.pop();
+                  console.log("FILEPATH", filePath)
+                }
+                const addedLine = line.slice(1);
+                const matches = ${{ steps.yaml2json.outputs.data }}
+
+                for(const match of matches.matches){
+                  const commentText = match.comment ? match.comment : matches.defaults.comment;
+                  if (matchesPattern(match.regex, addedLine)){
+                    singleComment = {
+                      path: filePath,
+                      position: position,
+                      body: (commentText + addedLine)
+                    }
+                    console.log('Position ', position)
+                    arrayOfComments.push(singleComment)
+                  }
+                }
+
+              }
+              position += 1;
+            }
+            github.pulls.createReview({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+                commit_id: '${{ github.event.pull_request.head.sha }}',
+                event: "COMMENT",
+                comments: arrayOfComments,
+            })
