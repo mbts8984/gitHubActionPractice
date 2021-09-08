@@ -54,7 +54,7 @@ jobs:
                 pull_number: context.issue.number,
                 review_id: reviewId
               })
-              console.log("HEREEEE: ", allComments.data)
+              console.log("HEREEEE: ", allComments.data.position)
               let posit = allComments.data.position
               let bodbod = allComments.data.body
               let comment = {
