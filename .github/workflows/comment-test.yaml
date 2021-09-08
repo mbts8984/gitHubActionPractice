@@ -55,11 +55,11 @@ jobs:
                 pull_number: context.issue.number,
                 review_id: reviewId
               })
-              console.log("HEREEEE: ", allComments.data)
+              console.log("HEREEEE: ", allComments.data.user)
               let comment = {
                 position: allComments.data.position,
                 body: allComments.data.body,
-                commenter: allComments.data.user.login
+                commenter: allComments.data.user
               }
               commentAlreadyExists(comment)
             }
