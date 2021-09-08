@@ -36,8 +36,8 @@ jobs:
               const allComments =  await github.pulls.listReviews({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                pull_number: pullNumber,
-                review_id: reviewId
+                pullNumber: context.issue.number,
+                reviewId: context.payload.pull_request.id
               })
               return allComments.data.filter((comment) => {
                 console.log("IDName: ", comment.user.login)
@@ -84,7 +84,8 @@ jobs:
 
                 for(const match of matches.matches){
                   const commentText = match.comment ? match.comment : matches.defaults.comment;
-                  commentAlreadyExists(botComments, position, commentText)
+                  getBotComments()
+                  // commentAlreadyExists(botComments, position, commentText)
                   if (matchesPattern(match.regex, addedLine) {
                     singleComment = {
                       path: filePath,
