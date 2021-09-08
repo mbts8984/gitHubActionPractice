@@ -81,9 +81,10 @@ jobs:
                 }
                 const addedLine = line.slice(1);
                 const matches = ${{ steps.yaml2json.outputs.data }}
-                commentAlreadyExists(botComments, position, commentText)
+
                 for(const match of matches.matches){
                   const commentText = match.comment ? match.comment : matches.defaults.comment;
+                  commentAlreadyExists(botComments, position, commentText)
                   if (matchesPattern(match.regex, addedLine) {
                     singleComment = {
                       path: filePath,
