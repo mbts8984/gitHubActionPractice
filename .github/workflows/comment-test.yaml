@@ -47,9 +47,9 @@ jobs:
                   console.log("FILEPATH", filePath)
                 }
                 const addedLine = line.slice(1);
-                const matches = ${{ steps.yaml2json.outputs.data }}
+                const allMatches = ${{ steps.yaml2json.outputs.data }}
 
-                for(const match of matches.matches){
+                for(const match of allMatches.matches){
                   const commentText = match.comment ? match.comment : matches.defaults.comment;
                   if (matchesPattern(match.regex, addedLine)){
                     singleComment = {
