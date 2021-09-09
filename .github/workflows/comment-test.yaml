@@ -25,50 +25,9 @@ jobs:
         uses: actions/github-script@v4
         with:
           script: |
-            let BOT_NAME = 'github-actions[bot]'
-
-            let review_id = ''
             const matchesPattern = (pattern, text) => {
               const regex = new RegExp(pattern);
               return !!text.match(regex)
-            }
-            // console.log("STUFF: ", context)
-
-            let getReview = async () => {
-              const allReviews =  await github.pulls.listReviews({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.issue.number,
-              })
-              
-              return allReviews.data.filter((comment) => {
-                // console.log("IDName: ", comment)
-                let review_id = comment.id
-                getTheCommentsGod(review_id)
-                BOT_NAME = comment.user.login})
-            }
-
-            getTheCommentsGod = async (reviewId) => {
-              const allComments =  await github.pulls.listCommentsForReview({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.issue.number,
-                review_id: reviewId
-              })
-              console.log("HEREEEE: ", allComments.data)
-              
-              let comment = {
-                position: allComments.data.position,
-                body: allComments.data.body,
-                BOT_NAME
-              }
-            }
-
-            getReview()
-
-            const commentAlreadyExists = (comments) => {
-              // code here
-              console.log('Made it to commentAlreadyExists')
             }
             const diff_url = context.payload.pull_request.diff_url
             const files = await github.request(diff_url)
