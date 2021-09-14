@@ -44,7 +44,6 @@ jobs:
                 if(line.includes("+++")){
                   let parts = line.split("b/")
                   filePath  = parts.pop();
-                  console.log("FILEPATH", filePath)
                 }
                 const addedLine = line.slice(1);
                 const matches = ${{ steps.yaml2json.outputs.data }}
