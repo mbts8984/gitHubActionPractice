@@ -31,7 +31,9 @@ jobs:
             }
             const diff_url = context.payload.pull_request.diff_url
             const files = await github.request(diff_url)
+            console.log("FILES ", files)
             const file = files.data
+            console.log("SINGLE_FILE ", file)
             let position = 0
             let filePath = ''
             let arrayOfComments = []
