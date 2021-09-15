@@ -30,6 +30,7 @@ jobs:
               return !!text.match(regex)
             }
             const diff_url = context.payload.pull_request.diff_url
+            console.log("DIFF_URL ", diff_url)
             const files = await github.request(diff_url)
             console.log("FILES ", files)
             const file = files.data
