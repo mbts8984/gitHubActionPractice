@@ -50,7 +50,7 @@ jobs:
                 }
                 const addedLine = line.slice(1);
                 const matches = ${{ steps.yaml2json.outputs.data }}
-
+                console.log("MATCHES ", matches)
                 for(const match of matches.matches){
                   const commentText = match.comment ? match.comment : matches.defaults.comment;
                   if (matchesPattern(match.regex, addedLine)){
