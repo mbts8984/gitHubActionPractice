@@ -30,11 +30,12 @@ jobs:
               return !!text.match(regex)
             }
             const diff_url = context.payload.pull_request.diff_url
-            console.log("DIFF_URL ", diff_url)
             const files = await github.request(diff_url)
             console.log("FILES ", files)
+
             const file = files.data
-            console.log("SINGLE_FILE ", file)
+            console.log("SingleFile ", file)
+
             let position = 0
             let filePath = ''
             let arrayOfComments = []
@@ -51,6 +52,7 @@ jobs:
                 const addedLine = line.slice(1);
                 const matches = ${{ steps.yaml2json.outputs.data }}
                 console.log("MATCHES ", matches)
+                
                 for(const match of matches.matches){
                   const commentText = match.comment ? match.comment : matches.defaults.comment;
                   if (matchesPattern(match.regex, addedLine)){
