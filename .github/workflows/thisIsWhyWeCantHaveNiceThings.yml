@@ -1,0 +1,12 @@
+name: repoBworkflow
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [RepoAEvent]
+jobs:
+  repoBjobs:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: testBName
+        run: |
+          echo this event triggered.
