@@ -1,0 +1,14 @@
+name: env variables
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          echo "matrix=${{ secrets.BOO_SECRET }}" >> $GITHUB_ENV
+      - run: |
+          echo ${{env.matrix}}
