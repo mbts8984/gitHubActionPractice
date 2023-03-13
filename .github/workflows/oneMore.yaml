@@ -10,11 +10,13 @@ jobs:
       - uses: actions/checkout@main
         with:
           fetch-depth: "0"
-      - uses: fabasoad/data-format-converter-action@main
+      - name: test
+        uses: fabasoad/data-format-converter-action@main
         id: yaml2json
         with:
           input: "variables-to-check.yaml"
           from: "yaml"
           to: "json"
+
       - name: Print result
         run: echo "${{ steps.yaml2json.outputs.output }}"
