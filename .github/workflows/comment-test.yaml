@@ -21,7 +21,7 @@ jobs:
           echo ${{ steps.yaml2json.outputs.data }}
           echo "CONFIG=${{ steps.yaml2json.outputs.data }}" >> $GITHUB_ENV
 
-      - name: make comment
+      - name: make comment!
         uses: actions/github-script@v4
         with:
           script: |
