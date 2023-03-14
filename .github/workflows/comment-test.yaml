@@ -16,6 +16,9 @@ jobs:
           from: "yaml"
           to: "json"
 
+      - name: Print result
+        run: echo "${{ steps.yaml2json.outputs.output }}"
+
       - name: Get the file
         run: |
           echo ${{ steps.yaml2json.outputs.data }}
