@@ -93,5 +93,5 @@ runs:
       with:
         script: |
           const fs = require('fs');
-          core.setOutput('data', fs.readFileSync('${{ steps.info.outputs.YQ_TEMP_FILE }}', 'utf-8'));
+          core.setOutput('data', fs.readFileSync('${{ steps.info.outputs.YQ_TEMP_FILE }}');
           fs.unlinkSync('${{ steps.info.outputs.YQ_TEMP_FILE }}');
