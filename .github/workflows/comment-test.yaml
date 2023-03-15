@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: get file
-        uses: fabasoad/yaml-json-xml-converter-action@main
+      - name: Get file and convert
+        uses: fabasoad/data-format-converter-action@main
         id: yaml2json
         with:
-          path: "variables-to-check.yaml"
+          input: "variables-to-check.yaml"
           from: "yaml"
           to: "json"
 
