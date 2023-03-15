@@ -85,7 +85,7 @@ runs:
       shell: sh
     - name: Convert
       if: ${{ inputs.from != inputs.to }}
-      run: ${{ steps.info.outputs.YQ_EXEC }} -P '${{ inputs.input }}' -p=${{ inputs.from }} -o=${{ inputs.to }} > '${{ steps.info.outputs.YQ_TEMP_FILE }}'
+      run: ${{ steps.info.outputs.YQ_EXEC }} '${{ inputs.input }}' -p=${{ inputs.from }} -o=${{ inputs.to }} > '${{ steps.info.outputs.YQ_TEMP_FILE }}'
       shell: sh
     - name: Save output
       id: result
