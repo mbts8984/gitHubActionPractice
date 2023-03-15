@@ -22,12 +22,13 @@ jobs:
       #   run: echo "${{ steps.yaml2json.outputs.output }}"
 
       - name: Get the file
+        id: LOLNERD
         run: |
           echo ${{ steps.yaml2json.outputs.data }}
           echo "CONFIG=${{ steps.yaml2json.outputs.data }}" >> $GITHUB_ENV
           echo "OS  ${{ runner.os }}"
           echo "ARCH  ${{ runner.arch }}"
-          yq
+          yq -P variables-to-check.yaml
 
       - name: call other action
         uses: mbts8984/gitHubActionPractice/.github/actions/data-production-action@stateLines
@@ -36,6 +37,9 @@ jobs:
           input: "variables-to-check.yaml"
           from: "yaml"
           to: "json"
+
+      - name: nice to have
+        run: echo "${{ steps.LOLNERD.outputs.output }}"
 
       - name: Print result
         run: echo "${{ steps.secondStanza.outputs.output }}"
