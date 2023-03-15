@@ -31,8 +31,14 @@ runs:
         echo "YQ_TEMP_FILE=$YQ_TEMP_FILE" >> $GITHUB_OUTPUT
         YQ_INSTALLED=$(if command -v yq >/dev/null 2>&1; then echo true; else echo false; fi)
         echo "YQ_INSTALLED=$YQ_INSTALLED" >> $GITHUB_OUTPUT
+        if [ "${{ runner.os }}" = "macOS" ]; then
+          if [ "${{ runner.arch }}" = "ARM64" ]; then
+            YQ_BINARY=yq_darwin_arm64
+          else
+            YQ_BINARY=yq_darwin_amd64
+          fi
 
-        if [ "${{ runner.os }}" = "Linux" ]; then
+        elif [ "${{ runner.os }}" = "Linux" ]; then
           if [ "${{ runner.arch }}" = "X86" ]; then
             YQ_BINARY=yq_linux_386
           elif [ "${{ runner.arch }}" = "ARM" ]; then
@@ -47,7 +53,11 @@ runs:
           exit 1
         fi
         echo "YQ_BINARY=$YQ_BINARY" >> $GITHUB_OUTPUT
-
+        if [ "${{ runner.os }}" = "Windows" ]; then
+          echo "YQ_EXEC=yq.exe" >> $GITHUB_OUTPUT
+        else
+          echo "YQ_EXEC=yq" >> $GITHUB_OUTPUT
+        fi
       shell: sh
     - name: Check same from and to
       if: ${{ inputs.from == inputs.to }}
@@ -67,7 +77,9 @@ runs:
       if: ${{ inputs.from != inputs.to && steps.info.outputs.YQ_INSTALLED == 'false' }}
       run: |
         mv ${{ steps.info.outputs.YQ_BINARY }} ${{ steps.info.outputs.YQ_EXEC }}
-
+        if [ "${{ runner.os }}" != "Windows" ]; then
+          chmod +x ${{ steps.info.outputs.YQ_EXEC }}
+        fi
         echo "$(pwd)" >> $GITHUB_PATH
         echo "::debug::${{ steps.info.outputs.YQ_BINARY }}@${{ steps.info.outputs.YQ_VERSION }} has been installed"
       shell: sh
