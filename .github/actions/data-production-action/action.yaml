@@ -32,7 +32,7 @@ runs:
         YQ_INSTALLED=$(if command -v yq >/dev/null 2>&1; then echo true; else echo false; fi)
         echo "YQ_INSTALLED=$YQ_INSTALLED" >> $GITHUB_OUTPUT
 
-        elif [ "${{ runner.os }}" = "Linux" ]; then
+        if [ "${{ runner.os }}" = "Linux" ]; then
           if [ "${{ runner.arch }}" = "X86" ]; then
             YQ_BINARY=yq_linux_386
           elif [ "${{ runner.arch }}" = "ARM" ]; then
@@ -47,11 +47,7 @@ runs:
           exit 1
         fi
         echo "YQ_BINARY=$YQ_BINARY" >> $GITHUB_OUTPUT
-        if [ "${{ runner.os }}" = "Windows" ]; then
-          echo "YQ_EXEC=yq.exe" >> $GITHUB_OUTPUT
-        else
-          echo "YQ_EXEC=yq" >> $GITHUB_OUTPUT
-        fi
+
       shell: sh
     - name: Check same from and to
       if: ${{ inputs.from == inputs.to }}
@@ -85,5 +81,5 @@ runs:
       with:
         script: |
           const fs = require('fs');
-          core.setOutput('data', fs.readFileSync('${{ steps.info.outputs.YQ_TEMP_FILE }}'));
+          core.setOutput('data', fs.readFileSync('${{ steps.info.outputs.YQ_TEMP_FILE }}', 'utf-8'));
           fs.unlinkSync('${{ steps.info.outputs.YQ_TEMP_FILE }}');
