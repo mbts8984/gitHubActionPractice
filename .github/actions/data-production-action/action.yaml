@@ -1,7 +1,5 @@
 ---
 name: "Data Format Converter Action"
-author: Yevhen Fabizhevskyi
-description: "GitHub action that converts YAML / JSON / XML / PROPS data formats interchangeably"
 branding:
   icon: copy
   color: green
