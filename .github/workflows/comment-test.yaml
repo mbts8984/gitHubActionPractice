@@ -27,6 +27,7 @@ jobs:
           echo "CONFIG=${{ steps.yaml2json.outputs.data }}" >> $GITHUB_ENV
           echo "OS  ${{ runner.os }}"
           echo "ARCH  ${{ runner.arch }}"
+          yq
 
       - name: call other action
         uses: mbts8984/gitHubActionPractice/.github/actions/data-production-action@stateLines
