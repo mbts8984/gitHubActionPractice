@@ -29,7 +29,7 @@ jobs:
           echo "ARCH  ${{ runner.arch }}"
 
       - name: call other action
-        uses: mbts8984/gitHubActionPractice/.github/actions/data-production-action@main
+        uses: mbts8984/gitHubActionPractice/.github/actions/data-production-action@stateLines
         with:
           input: "variables-to-check.yaml"
           from: "yaml"
