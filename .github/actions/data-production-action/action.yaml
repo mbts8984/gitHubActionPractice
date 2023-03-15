@@ -89,11 +89,11 @@ runs:
         file=(${{ steps.info.outputs.YQ_EXEC }} '${{ inputs.input }}' -p=${{ inputs.from }} -o=${{ inputs.to }} > '${{ steps.info.outputs.YQ_TEMP_FILE }}')
         echo "FILEEEEE $file"
       shell: sh
-    - name: Save output
-      id: result
-      uses: actions/github-script@v6
-      with:
-        script: |
-          const fs = require('fs');
-          core.setOutput('data', fs.readFileSync('${{ steps.info.outputs.YQ_TEMP_FILE }}', 'utf-8'));
-          fs.unlinkSync('${{ steps.info.outputs.YQ_TEMP_FILE }}');
+    # - name: Save output
+    #   id: result
+    #   uses: actions/github-script@v6
+    #   with:
+    #     script: |
+    #       const fs = require('fs');
+    #       core.setOutput('data', fs.readFileSync('${{ steps.info.outputs.YQ_TEMP_FILE }}', 'utf-8'));
+    #       fs.unlinkSync('${{ steps.info.outputs.YQ_TEMP_FILE }}');
