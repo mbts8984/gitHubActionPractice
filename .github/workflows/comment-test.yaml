@@ -32,6 +32,7 @@ jobs:
         run: |
           yq 'variables-to-check.yaml' -p=yaml -o=json > 'data-format-converter-action.json' 
           jq -c . 'data-format-converter-action.json' > 'anotherFile.json'
+          echo ::set-output name=version::$(cat anotherFile.json)
 
       # - name: call other action
       #   uses: mbts8984/gitHubActionPractice/.github/actions/data-production-action@stateLines
@@ -46,7 +47,7 @@ jobs:
 
       - name: Print result
         run: |
-          echo "test ${{ steps.secondStanza.outputs.data }}"
+          echo "test ${{ steps.secondStanza.outputs.version }}"
           ls
           cat 'anotherFile.json'
 
