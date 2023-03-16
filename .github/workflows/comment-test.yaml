@@ -46,7 +46,7 @@ jobs:
 
       - name: Print result
         run: |
-          echo "test ${{ steps.secondStanza.outputs }}"
+          echo "test ${{ steps.secondStanza.outputs.data }}"
           ls
           cat 'anotherFile.json'
 
