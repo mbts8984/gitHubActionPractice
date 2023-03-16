@@ -26,25 +26,29 @@ jobs:
         run: |
           echo ${{ steps.yaml2json.outputs.data }}
           echo "CONFIG=${{ steps.yaml2json.outputs.data }}" >> $GITHUB_ENV
-          echo "OS  ${{ runner.os }}"
-          echo "ARCH  ${{ runner.arch }}"
-          yq -P variables-to-check.yaml
 
-      - name: call other action
-        uses: mbts8984/gitHubActionPractice/.github/actions/data-production-action@stateLines
+      - name: convert file
         id: secondStanza
-        with:
-          input: "variables-to-check.yaml"
-          from: "yaml"
-          to: "json"
+        run: |
+          yq 'variables-to-check.yaml' -p=yaml -o=json > 'data-format-converter-action.json' 
+          jq -c . 'data-format-converter-action.json' > 'anotherFile.json'
+
+      # - name: call other action
+      #   uses: mbts8984/gitHubActionPractice/.github/actions/data-production-action@stateLines
+      #   id: secondStanza
+      #   with:
+      #     input: "variables-to-check.yaml"
+      #     from: "yaml"
+      #     to: "json"
 
       # - name: nice to have
       #   run: echo "${{ steps.LOLNERD.outputs.output }}"
 
       - name: Print result
         run: |
-          echo "test ${{ steps.secondStanza.outputs.output }}"
+          echo "test ${{ steps.secondStanza.outputs }}"
           ls
+          cat 'anotherFile.json'
 
       # - name: make comment!
       #   uses: actions/github-script@v4
