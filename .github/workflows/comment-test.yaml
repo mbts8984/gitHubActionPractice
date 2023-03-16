@@ -42,18 +42,9 @@ jobs:
       #   run: echo "${{ steps.LOLNERD.outputs.output }}"
 
       - name: Print result
-        run: echo "${{ steps.secondStanza.outputs.output }}"
-
-      # - name: Download mikefarah/yq
-      #   if: ${{ inputs.from != inputs.to && steps.info.outputs.YQ_INSTALLED == 'false' }}
-      #   uses: robinraju/release-downloader@v1.7
-      #   with:
-      #     repository: mikefarah/yq
-      #     latest: false
-      #     tag: v${{ steps.info.outputs.YQ_VERSION }}
-      #     fileName: ${{ steps.info.outputs.YQ_BINARY }}
-      #     tarBall: false
-      #     zipBall: false
+        run: |
+          echo "test ${{ steps.secondStanza.outputs.output }}"
+          ls
 
       # - name: make comment!
       #   uses: actions/github-script@v4
