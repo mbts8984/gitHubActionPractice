@@ -89,7 +89,7 @@ runs:
       run: |
         echo "${{ steps.info.outputs.YQ_EXEC }} '${{ inputs.input }}' -p=${{ inputs.from }} -o=${{ inputs.to }} > 'data-format-converter-action.json'"
         ${{ steps.info.outputs.YQ_EXEC }} '${{ inputs.input }}' -p=${{ inputs.from }} -o=${{ inputs.to }} > 'data-format-converter-action.json'
-        jq -c . 'data-format-converter-action.json'
+        jq -c . 'data-format-converter-action.json' > 'anotherFile.json'
       shell: sh
 
     # - name: see the thing

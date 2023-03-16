@@ -38,8 +38,8 @@ jobs:
           from: "yaml"
           to: "json"
 
-      - name: nice to have
-        run: echo "${{ steps.LOLNERD.outputs.output }}"
+      # - name: nice to have
+      #   run: echo "${{ steps.LOLNERD.outputs.output }}"
 
       - name: Print result
         run: echo "${{ steps.secondStanza.outputs.output }}"
