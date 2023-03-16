@@ -99,11 +99,11 @@ runs:
     #     cat data-format-converter-action.json
     #   shell: sh
 
-    # - name: Save output
-    #   id: result
-    #   uses: actions/github-script@v6
-    #   with:
-    #     script: |
-    #       const fs = require('fs');
-    #       core.setOutput('data', fs.readFileSync('${{ steps.info.outputs.YQ_TEMP_FILE }}', 'utf-8').replace(/\s+$/gm, ''));
-    #       fs.unlinkSync('${{ steps.info.outputs.YQ_TEMP_FILE }}');
+    - name: Save output
+      id: result
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          core.setOutput('data', fs.readFileSync('${{ steps.info.outputs.data-format-converter-action.json }}', 'utf-8').replace(/\s+$/gm, ''));
+          fs.unlinkSync('${{ steps.info.outputs.data-format-converter-action.json }}');
