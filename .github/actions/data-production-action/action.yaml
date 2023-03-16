@@ -92,12 +92,12 @@ runs:
         jq -c . 'data-format-converter-action.json'
       shell: sh
 
-    - name: see the thing
-      run: |
-        echo "sup "
-        ls
-        cat data-format-converter-action.json
-      shell: sh
+    # - name: see the thing
+    #   run: |
+    #     echo "sup "
+    #     ls
+    #     cat data-format-converter-action.json
+    #   shell: sh
 
     # - name: Save output
     #   id: result
