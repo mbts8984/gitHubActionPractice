@@ -21,18 +21,19 @@ jobs:
       # - name: Print result
       #   run: echo "${{ steps.yaml2json.outputs.output }}"
 
-      - name: Get the file
-        id: LOLNERD
-        run: |
-          echo ${{ steps.yaml2json.outputs.data }}
-          echo "CONFIG=${{ steps.yaml2json.outputs.data }}" >> $GITHUB_ENV
+      # - name: Get the file
+      #   id: LOLNERD
+      #   run: |
+      #     echo ${{ steps.yaml2json.outputs.data }}
+      #     echo "CONFIG=${{ steps.yaml2json.outputs.data }}" >> $GITHUB_ENV
 
       - name: convert file
         id: secondStanza
         run: |
           yq 'variables-to-check.yaml' -p=yaml -o=json > 'data-format-converter-action.json' 
           jq -c . 'data-format-converter-action.json' > 'anotherFile.json'
-          echo ::set-output name=version::$(cat anotherFile.json)
+          # echo ::set-output name=version::$(cat anotherFile.json)
+          echo "CONFIG=$(cat anotherFile.json)" >> $GITHUB_ENV
 
       # - name: call other action
       #   uses: mbts8984/gitHubActionPractice/.github/actions/data-production-action@stateLines
@@ -47,9 +48,8 @@ jobs:
 
       - name: Print result
         run: |
-          echo "test ${{ steps.secondStanza.outputs.version }}"
-          ls
-          cat 'anotherFile.json'
+          echo "test $CONFIG"
+          # cat 'anotherFile.json'
 
       - name: make comment
         uses: actions/github-script@v4
