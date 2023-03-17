@@ -51,14 +51,10 @@ jobs:
           ls
           cat 'anotherFile.json'
 
-      - name: make comment!
+      - name: make comment
         uses: actions/github-script@v4
         with:
           script: |
-            const matchesPattern = (pattern, text) => {
-              const regex = new RegExp(pattern);
-              return !!text.match(regex)
-            }
             const diff_url = context.payload.pull_request.diff_url
             const files = await github.request(diff_url)
             const file = files.data
